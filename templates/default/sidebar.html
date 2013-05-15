@@ -1,0 +1,36 @@
+<div class="radiuswell">
+    <div class="related-header">最新文章</div>
+    <ul class="navigation">
+      {% for post in recentlist %}
+      	<li><a href="/post/id/{{ post.id }}" title="{{ post.title }}">{{ post.title }}</a></li>
+      {% end %}
+    </ul>
+</div><!--/.well -->
+
+<div class="radiuswell">
+	<div class="related-header">文章分类</div>
+	<ul class="navigation">
+	  {% for category in categorylist %}
+	    {% if category.parent == 0 %}
+	  	<li><a href="/post/category/{{ category.slug }}/" title="{{ category.name }}">{{ category.name }}&nbsp;({{ category.count }})</a>
+	  	    <ul class="navigation">
+	  	        {% for sub in categorylist %}
+	      	        {% if sub.parent == category.id %}
+	      	             <li><a href="/post/category/{{ sub.slug }}/" title="{{ sub.name }}">{{ sub.name }}&nbsp;({{ sub.count }})</a></li>
+	      	        {% end %}
+	  	        {% end %}
+	  	     </ul>
+	  	</li>
+	  	{% end %}
+	  {% end %}
+	</ul>
+</div><!--/.well -->
+
+<div class="radiuswell">
+    <div class="related-header">标签</div>
+    <div class="categorys">
+      {% for tag in taglist %}
+        <a href="/post/tag/{{ tag.slug }}/" title="{{ tag.name }}">{{ tag.name }}&nbsp;({{ tag.count }})</a>
+      {% end %}
+    </div>
+</div><!--/.well -->

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block other-css %}
+<link href="/static/ckeditor/contents.css" rel="stylesheet">
+{% end %}
+
+{% block content-nav %}
+	<ul class="breadcrumb">
+		<li>
+			<a href="/admin/home">Home</a> <span class="divider">/</span>
+		</li>
+		<li>
+			<a href="/admin/post/list">Post</a>
+		</li>
+		<li class="pull-right">
+            <i class="icon-arrow-left"></i>
+            <a href="/admin/home">Return to Home</a>
+        </li>
+	</ul>
+{% end %}
+
+{% block content-header %}
+	<div class="box-header " data-original-title>
+		
+	</div>
+{% end %}
+
+{% block content-body %}
+	<div class="box-content">
+	<form class="form-horizontal" method="post">
+	{% module xsrf_form_html() %}
+	{% autoescape None %}
+		<div class="row-fluid sortable">
+			<div class="span9">
+			  	<div>
+				{{ form.title(class_="span6 typeahead", placeholder="Title") }}
+				{% if form.title.errors %}
+				<span class="help-inline">{% for error in form.title.errors %}{{ error }}{% end %}</span>
+				{% end %}
+			  	</div>
+				<div>
+					{{ form.content(class_="ckeditor") }}
+				</div>
+			</div>
+			<div class="span3">
+				<div class="row-fluid">
+				<p class="center"><button type="submit" class="btn btn-primary">Publish</button></p>
+				</div>
+				<div class="row-fluid">
+				  <ul class="nav nav-list">
+					<li class="nav-header">Category</li>
+					<input value="{{ setting['default_category'] }}" type="hidden" name="post_category[]">
+					<input value="{{ current_categorys }}" type="hidden" id="old_post_category_value">
+					<div id="categorylist">
+						<!-- ajax will load content -->
+					</div>
+					<li>
+					    <div class="input-append">
+					    <input type="text" value="" placeholder="Add new Category" name="new_category" id="new_category" class="input-medium">
+						<a class="btn" id="category_quickadd">New</a>
+					    </div>
+					</li>
+				  </ul>
+			  </div>
+			  <hr />
+			  <div class="row-fluid">
+                  <ul class="nav nav-list">
+                    <li class="nav-header">Tag</li>
+                    <li>
+                        <div>
+                        <input type="text" value="{{ current_tags }}" placeholder="please input tags" name="new_tags" class="input-medium">
+                        Please split tags with ','
+                        </div>
+                    </li>
+                  </ul>
+              </div>
+              <hr />
+              <div class="row-fluid">
+                  <ul class="nav nav-list">
+                    <li class="nav-header">Parent Page</li>
+                    <li>
+                        <div>
+                        {{ form.parent(id="parent_page") }}
+                        </div>
+                    </li>
+                  </ul>
+              </div>
+		  	</div>
+		</div>
+	</form>
+	</div>
+{% end %}
+
+{% block other-javascript %}
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    function set_current_category () {
+      categorys = $("#old_post_category_value").val();
+      clist = categorys.split(",");
+      for (var i=0; i < clist.length; i++) {
+        checkid = "#post_category_"+clist[i];
+        checkid2 = "[id=post_category_"+clist[i]+"]:checkbox"
+        xx = $(checkid);
+        cc = $(checkid2);
+        cc = $('[id=post_category_6]:checkbox');
+        xx.attr("checked", true);
+      };
+    }
+    $(document).ready(function()
+    {
+        updateCategoryList(set_current_category);
+    });
+</script>
+{% end %}

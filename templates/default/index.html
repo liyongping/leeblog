@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content-main %}
+<div id="main" class="span9">
+	{# 每个文章摘要 #}
+	{% for post in postlist %}
+
+	<div class="radiuswell post row-fluid" id="post-{{ post.id }}">
+		<h2><a class="title" href="/post/id/{{ post.id }}" rel="bookmark">{{ post.title }}</a></h2>
+		<div class="info row-fluid">
+		    <span class="author">作者：{{ post.authorname }}</span>
+		    <span class="comment_count pull-right">&nbsp;&nbsp;<a href="/post/id/{{ post.id }}#comment-list" title="《{{ post.title }}》上的评论">评论:{{ post.comment_count }}</a></span>
+			<span class="date pull-right">{{ post.date }}</span>
+			<div class="fixed"></div>
+		</div>
+		<div class="content row-fluid">
+			<div>{% raw post.content %}</div>			
+			<div class="fixed"></div>
+		</div>
+		<div class="under row-fluid">
+			<span class="categories">分类: </span>
+			{% for r in relationlist %}
+			   {% if r[1]  == post.id %}
+				   {% if r[0].taxonomy == "category" %}
+				   <a href="/post/category/{{ r[0].slug }}/" title="查看{{ r[0].name }} 中的全部文章" rel="category">{{ r[0].name }}</a>&nbsp;
+				   {% end %}
+			   {% end %}
+			{% end %}
+			<span class="tags">标签: </span>
+			{% for r in relationlist %}
+			   {% if r[1]  == post.id %}
+				   {% if r[0].taxonomy == "post_tag" %}
+				   <a href="/post/tag/{{ r[0].slug }}/" title="查看{{ r[0].name }} 中的全部文章" rel="tag">{{ r[0].name }}</a>&nbsp;
+				   {% end %}
+			   {% end %}
+			{% end %}
+		</div>
+	</div>
+
+	{% end %}
+	
+	<div class="pagination row-fluid text-center">
+	  <ul>
+	  	{% if pageList %}
+		    {% if currentPage == pageList[0] %}
+		       <li><a href="">Prev</a></li>
+		    {% else %}
+		       <li><a href="?p={{ currentPage-1 }}">Prev</a></li>
+		    {% end %}
+	
+		    {% for p in pageList%}
+	    	    {% if p == currentPage %}
+	    	       <li class="active">
+	    	    {% else %}
+	    	       <li>
+	    	    {% end %}
+		        <a href="?p={{ p }}">{{ p }}</a></li>
+		    {% end %}
+		    
+		    {% if currentPage == pageList[-1] %}
+		       <li><a href="">Next</a></li>
+	        {% else %}
+	           <li><a href="?p={{ currentPage+1 }}">Next</a></li>
+	        {% end %}
+		{% end %}
+	  </ul>
+	</div>
+	
+</div>
+{% end %}

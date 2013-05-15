@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content-nav %}
+	<ul class="breadcrumb">
+		<li>
+			<a href="/admin/home">Home</a> <span class="divider">/</span>
+		</li>
+		<li>
+			<a href="/home/profile">Profile</a>
+		</li>
+		<li class="pull-right">
+			<i class="icon-arrow-left"></i>
+			<a href="/admin/home">Return to Home</a>
+		</li>
+	</ul>
+{% end %}
+
+{% block content-header %}
+	<div class="box-header " data-original-title>
+		
+	</div>
+{% end %}
+
+{% block content-body %}
+	<div class="box-content">
+			<form action="/admin/profile" class="form-horizontal" method="post" id="edit-profile">
+			{% module xsrf_form_html() %}
+			{% autoescape None %}
+			<fieldset>
+				<div class="control-group">
+					<label for="username" class="control-label">Username</label>
+					<div class="controls">
+						<input type="text" disabled="" value="{{ user.loginname }}" id="username" class="input-medium disabled">
+						<p class="help-block">Your username is for logging in and cannot be changed.</p>
+					</div> <!-- /controls -->				
+				</div> <!-- /control-group -->
+				
+				
+				<div class="control-group">		
+					{{ form.displayname.label(class_="control-label") }}
+					<div class="controls">
+						{{ form.displayname(class_="input-medium") }}
+						{% if form.displayname.errors %}
+						<span class="help-inline">{% for error in form.displayname.errors %}{{ error }}{% end %}</span>
+						{% end %}
+					</div> <!-- /controls -->				
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					{{ form.email.label(class_="control-label") }}
+					<div class="controls">
+						{{ form.email(class_="input-large") }}
+						{% if form.email.errors %}
+						<span class="help-inline">{% for error in form.email.errors %}{{ error }}{% end %}</span>
+						{% end %}
+					</div> <!-- /controls -->				
+				</div> <!-- /control-group -->
+				
+				
+				<br><br>
+				<div class="control-group">											
+					{{ form.password0.label(class_="control-label") }}
+					<div class="controls">
+						{{ form.password0(class_="input-medium") }}
+						{% if form.password0.errors %}
+						<span class="help-inline">{% for error in form.password0.errors %}{{ error }}{% end %}</span>
+						{% end %}
+					</div> <!-- /controls -->				
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					{{ form.password1.label(class_="control-label") }}
+					<div class="controls">
+						{{ form.password1(class_="input-medium") }}
+						{% if form.password1.errors %}
+						<span class="help-inline">{% for error in form.password1.errors %}{{ error }}{% end %}</span>
+						{% end %}
+					</div> <!-- /controls -->				
+				</div> <!-- /control-group -->
+				
+				
+				<div class="control-group">
+					{{ form.password2.label(class_="control-label") }}
+					<div class="controls">
+						{{ form.password2(class_="input-medium") }}
+						{% if form.password2.errors %}
+						<span class="help-inline">{% for error in form.password2.errors %}{{ error }}{% end %}</span>
+						{% end %}
+					</div> <!-- /controls -->				
+				</div> <!-- /control-group -->
+				{% if success %}
+					<span>修改成功，新密码，将在下次登录生效！！！</span>
+				{% else %}
+					<br>
+				{% end %}
+				<div class="form-actions">
+					<button class="btn btn-primary" type="submit">Save</button> 
+					<button class="btn">Cancel</button>
+				</div> <!-- /form-actions -->
+			</fieldset>
+		</form>
+	</div>
+{% end %}

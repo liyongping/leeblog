@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block content-nav %}
+	<ul class="breadcrumb">
+		<li>
+			<a href="/admin/home">Home</a> <span class="divider">/</span>
+		</li>
+		<li>
+			<a href="/admin/setting">Setting</a>
+		</li>
+		<li class="pull-right">
+			<i class="icon-arrow-left"></i>
+			<a href="/admin/home">Return to Home</a>
+		</li>
+	</ul>
+{% end %}
+
+{% block content-header %}
+	<div class="box-header " data-original-title>
+		
+	</div>
+{% end %}
+
+{% block content-body %}
+	<div class="box-content">
+		<form action="/admin/setting" class="form-horizontal" method="post" id="edit-setting">
+			{% module xsrf_form_html() %}
+			{% autoescape None %}
+			<fieldset>
+				<div class="control-group">
+					<label for="blogname" class="control-label">博客名称</label>
+					<div class="controls">
+						<input type="text" value="{{ setting['blogname']}}" id="blogname" name="blogname" class="input-large">
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					<label for="blogdescription" class="control-label">博客描述</label>
+					<div class="controls">
+						<textarea rows="8" name="blogdescription" id="blogdescription" class="span6 typeahead">{{ setting['blogdescription']}}</textarea>
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					<label for="admin_email" class="control-label">管理员邮箱</label>
+					<div class="controls">
+						<input type="text" value="{{ setting['admin_email']}}" id="admin_email" name="admin_email" class="input-medium">
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					<label for="users_can_register" class="control-label">是否允许新用户注册</label>
+					<div class="controls">
+						<select name="users_can_register" id="users_can_register">
+							<option value="1" {% if setting['users_can_register']=='1' %}selected{% end %}>允许</option>
+							<option value="0" {% if setting['users_can_register']=='0' %}selected{% end %}>禁止</option>
+						</select>
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					<label for="users_can_comment" class="control-label">是否允许评论</label>
+					<div class="controls">
+						<select name="users_can_comment" id="users_can_comment">
+							<option value="1" {% if setting['users_can_comment']=='1' %}selected{% end %}>允许</option>
+							<option value="0" {% if setting['users_can_comment']=='0' %}selected{% end %}>禁止</option>
+						</select>
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					<label for="comments_notify" class="control-label">评论通知</label>
+					<div class="controls">
+						<select name="comments_notify" id="comments_notify">
+							<option value="1" {% if setting['comments_notify']=='1' %}selected{% end %}>启用</option>
+							<option value="0" {% if setting['comments_notify']=='0' %}selected{% end %}>禁用</option>
+						</select>
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					<label for="default_category" class="control-label">缺省文章分类ID</label>
+					<div class="controls">
+						<input type="text" value="{{ setting['default_category']}}" id="default_category" name="default_category" class="input-medium">
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					<label for="posts_per_page" class="control-label">每页显示多少篇文章</label>
+					<div class="controls">
+						<input type="text" value="{{ setting['posts_per_page']}}" id="posts_per_page" name="posts_per_page" class="input-medium">
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					<label for="posts_per_rss" class="control-label">每页RSS显示多少篇文章</label>
+					<div class="controls">
+						<input type="text" value="{{ setting['posts_per_rss']}}" id="posts_per_rss" name="posts_per_rss" class="input-medium">
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+				
+				<div class="control-group">
+					<label for="rss_use_excerpt" class="control-label">RSS只使用</label>
+					<div class="controls">
+						<select name="rss_use_excerpt" id="rss_use_excerpt">
+							<option value="1" {% if setting['rss_use_excerpt']=='1' %}selected{% end %}>摘要</option>
+							<option value="0" {% if setting['rss_use_excerpt']=='0' %}selected{% end %}>全文</option>
+						</select>
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+				{% if success %}
+                    <span style="color: rgb(74, 241, 9);">设置保存成功！！！</span>
+                {% else %}
+                    <br>
+                {% end %}
+				<div class="form-actions">
+					<button class="btn btn-primary" type="submit">Save</button> 
+					<button class="btn">Cancel</button>
+				</div> <!-- /form-actions -->
+			</fieldset>
+		</form>
+	</div>
+{% end %}
+
+{% block other-javascript %}
+<script src="/static/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+    function OptionsSaveSuccess(responseText)  { 
+        if(responseText != ""){
+            comment = JSON.parse(responseText);
+            if(comment.length != 2)
+                return;
+        }
+    }
+
+    var options_rules = {
+        rules: {
+            blogname: {
+                minlength: 2,
+                maxlength: 32,
+                required: true
+            },
+            blogdescription: {
+                minlength: 2,
+                maxlength: 100,
+                required: true
+            },
+            admin_email: {
+                required: true,
+                email: true
+            },
+            default_category: {
+                required: true,
+                number: true
+            },
+            posts_per_page: {
+                required: true,
+                number: true,
+                range: [1,100]
+            },
+            posts_per_rss: {
+                required: true,
+                number: true,
+                range: [1,100]
+            },
+        }
+    };
+    $('#edit-setting').validate(options_rules);
+</script>
+{% end %}

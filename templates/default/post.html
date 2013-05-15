@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content-main %}
+<div id="main" class="span9">
+	<div class="post" id="post-{{ article.id }}">
+		<h2>{{ article.title }}</h2>
+		<div class="info row-fluid">
+		    <span class="author"><i class="icon-user"></i>{{ article.authorname }}</span>
+			<span class="comment_count pull-right">&nbsp;&nbsp;<i class="icon-comment"></i><a href="#comment-list" id="post-comment-count" title="《{{ article.title }}》上的评论"> {{ article.comment_count }}</a></span>
+			<span class="date pull-right">发表于&nbsp;&nbsp;{{ article.date }}</span>
+			<div class="fixed"></div>
+		</div>
+		<div class="content row-fluid">
+			<div>{% raw article.content %}</div>			
+			<div class="fixed"></div>
+		</div>
+		<div class="under row-fluid">
+			<span class="tags"><i class="icon-folder-open"></i></span>
+	        {% for r in relationlist %}
+	           {% if r[1]  == article.id %}
+	               {% if r[0].taxonomy == "category" %}
+	               <a href="/post/category/{{ r[0].slug }}/" title="查看{{ r[0].name }} 中的全部文章" rel="category">{{ r[0].name }}</a>&nbsp;
+	               {% end %}
+	           {% end %}
+	        {% end %}
+	        <span class="tags"><i class="icon-tags"></i></span>
+	        {% for r in relationlist %}
+	           {% if r[1]  == article.id %}
+	               {% if r[0].taxonomy == "post_tag" %}
+	               <a href="/post/tag/{{ r[0].slug }}/" title="查看{{ r[0].name }} 中的全部文章" rel="tag">{{ r[0].name }}</a>&nbsp;
+	               {% end %}
+	           {% end %}
+	        {% end %}
+		</div>
+	</div>
+	<hr />
+	<div id="view-comments" class="entry-comments row-fluid">
+	    <div class='row-fluid' style="display: none;">
+		<h4><a class="scrollto pull-right" href="#commentform">Make a comment</a></h4>
+		</div>
+		<div id="comment-template" class="comment-block" style="display:none">
+			<div class='comment'>
+				<div class='comment-meta'>
+					<span class='comment-author'>
+						<i class='icon-user'></i>
+						<a href='' title='' class='author-link'></a>
+					</span>
+					<span class='comment-rely pull-right'>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;<a class='comment-reply-link' href=''>Reply</a>
+                    </span>
+					<span class='comment-time pull-right'>
+						<i class='icon-time'></i>
+						<time class='published'></time>
+					</span>
+					
+				</div>
+				<div class='text'></div>
+			</div>
+			<ul class='children'>
+			</ul>
+		</div>
+		<div class="row-fluid">
+		    <ul id="comment-list">
+            <li>
+                <ul class='children'>
+                </ul>
+            </li>
+            </ul>
+		</div>
+		
+	</div>
+	<hr />
+	<div id="addcomment" class="">
+	<form id="commentform" name="commentform" method="post" action="/comment/add">
+		<div style="display:none" id="commentform-hide-data">
+			{% module xsrf_form_html() %}
+			<input type="hidden" value="{{ article.id }}" id="comment_post_id" name="comment_post_id">
+			<input type="hidden" value="0" id="comment_parent_id" name="comment_parent_id">
+			</div>
+		<div class="row-fluid">
+				<div id="author_info" class="span10">
+					<div class="row-fluid control-group">
+						<input type="text" placeholder="name" value="" id="author" class="requird" name="author">
+						<span id="name-help-tip" class="help-inline">*昵称 (必填,长度不少于4位)</span>
+					</div>
+					<div id="name-help-tip" class="row-fluid control-group">
+						<input type="text" placeholder="email" value="" id="email" class="requird" name="email">
+						<span id="email-help-tip" class="help-inline">*电子邮箱 (我们会为您保密) (必填)</span>
+					</div>
+					<div class="row-fluid control-group">
+						<input type="text" placeholder="website link" value="" id="url" name="url">
+						<span id="url-help-tip" class="help-inline">网址</span>
+					</div>
+				</div>
+				<div id="cancel-reply" class="span2 pull-right" style="display: none">
+					<a href="#commentform" class="comment-reply-link pull-right" onclick="return ResetReply()">取消回复</a>
+				</div>
+	
+			<!-- comment input -->
+			<div class="row-fluid">
+					<textarea cols="500" rows="8" id="comment" name="comment" class="span12 requird" placeholder="Comment"></textarea>
+			</div>
+			<!-- comment submit and rss -->
+			<div class="row-fluid" id="submitbox">
+				<div class="submitbutton">
+					<div class="span2 pull-right">
+	          			<input type="submit" class="btn btn-large btn-block" value="Submit" />
+	        		</div>
+				</div>
+				<div class="fixed"></div>
+			</div>
+		</div>
+	</form>
+	</div>
+</div>
+{% end %}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>博客管理后台</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="blog panel">
+	<meta name="author" content="admin">
+
+	<!-- The styles -->
+	{% block other-css %}
+	{% end %}
+	<link id="bs-css" href="/static/css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+	  body {
+		padding-bottom: 40px;
+	  }
+	  .sidebar-nav {
+		padding: 9px 0;
+	  }
+	</style>
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="/static/css/admin.css" rel="stylesheet">
+
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+
+	<link rel="shortcut icon" href="/static/img/favicon32.ico">
+
+</head>
+
+<body>
+		<!-- topbar starts -->
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="/"> <img alt="Charisma Logo" src="/static/img/logo20.png" /> <span>Lee Blog</span></a>
+				
+				<!-- user dropdown starts -->
+				<div class="btn-group pull-right" >
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="icon-user"></i><span class="hidden-phone"> admin</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/admin/profile">Profile</a></li>
+						<li class="divider"></li>
+						<li><a href="/admin/logout">Logout</a></li>
+					</ul>
+				</div>
+				<!-- user dropdown ends -->
+				
+				<div class="top-nav nav-collapse">
+					<ul class="nav">
+						<li><a href="/" target="_blank">Visit Site</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	<!-- topbar ends -->
+		<div class="container-fluid">
+		<div class="row-fluid">
+				
+			<!-- left menu starts -->
+			<div class="span2 main-menu-span">
+				<div class="well nav-collapse sidebar-nav">
+					<ul class="nav nav-tabs nav-stacked main-menu">
+						<li class="nav-header hidden-tablet">Main</li>
+						<li><a class="ajax-link" href="/admin/home"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
+						<li><a class="ajax-link" href="/admin/post/add"><i class="icon-edit"></i><span class="hidden-tablet"> Publish</span></a></li>
+						<li><a class="ajax-link" href="/admin/post/list"><i class="icon-list-alt"></i><span class="hidden-tablet"> Post List</span></a></li>
+						<li><a class="ajax-link" href="/admin/category/list"><i class="icon-list"></i><span class="hidden-tablet"> Category</span></a></li>
+						<li><a class="ajax-link" href="/admin/page/list"><i class="icon-th-list"></i><span class="hidden-tablet"> Page</span></a></li>
+						<li class="nav-header hidden-tablet">Setting</li>
+						<li><a class="ajax-link" href="/admin/profile"><i class="icon-user"></i><span class="hidden-tablet"> Profile</span></a></li>
+						<li><a class="ajax-link" href="/admin/setting"><i class="icon-wrench"></i><span class="hidden-tablet"> Setting</span></a></li>
+					</ul>
+					
+				</div><!--/.well -->
+			</div><!--/span-->
+			<!-- left menu ends -->
+			
+			<div id="content" class="span10">
+			<!-- content starts -->
+				<div>
+					{% block content-nav %}
+					<ul class="breadcrumb">
+						<li>
+							<a href="/admin/home">Home</a> <span class="divider">/</span>
+						</li>
+						<li>
+							<a href="#">Blank</a>
+						</li>
+					</ul>
+					{% end %}
+				</div>
+				{% block content %}
+				<div class="row-fluid sortable">
+					<div class="box span12">
+						{% block content-header %}
+						<div class="box-header " data-original-title>
+						</div>
+						{% end %}
+						
+						{% block content-body %}
+						<div class="box-content">
+						</div>
+						{% end %}
+					</div><!--/span-->
+				</div><!--/row-->
+				{% end %}
+			<!-- content ends -->
+			</div><!--/#content.span10-->
+		</div><!--/fluid-row-->
+				
+		<hr>
+
+		<footer>
+			<p class="pull-left">&copy; <a href="/" target="_blank">liyonging</a> 2012</p>
+			<p class="pull-right">Powered by: <a href="/">liyongping</a></p>
+		</footer>
+		
+	</div><!--/.fluid-container-->
+
+	<!-- external javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<!-- jQuery -->
+	<script src="/static/js/jquery-1.9.1.min.js"></script>
+	<!-- transition / effect library -->
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/admin.js"></script>
+	{% block other-javascript %}
+	{% end %}
+</body>
+</html>

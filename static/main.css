@@ -1,0 +1,204 @@
+body.custom-background{
+    background-color:#e6e6e6
+}
+
+body {
+    font-size: 14px;
+    font-family: Helvetica, Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+    color: #444;
+}
+body.custom-font-enabled {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+a {
+    color:#CC6714;
+    text-decoration: none;
+}
+
+a:hover {
+    color:#CC6714;
+    background-color: #F5F5F5;
+}
+
+a:visited {
+    color:#CC6714;
+}
+
+.site {
+    padding: 0 24px;
+    padding: 0 1.714285714rem;
+    background-color: #fff;
+}
+/* Minimum width of 600 pixels. */
+@media screen and (min-width: 600px) {
+    .site {
+        margin: 0 auto;
+        max-width: 960px;
+        max-width: 68.571428571rem;
+        overflow: hidden;
+    }
+    .site-content {
+        float: left;
+        width: 65.104166667%;
+    }
+}
+/* Minimum width of 960 pixels. */
+@media screen and (min-width: 960px) {
+    body {
+        background-color: #e6e6e6;
+    }
+    body .site {
+        padding: 0 40px;
+        padding: 0 2.857142857rem;
+        margin-top: 48px;
+        margin-top: 3.428571429rem;
+        margin-bottom: 48px;
+        margin-bottom: 3.428571429rem;
+        box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+    }
+}
+
+.radiuswell {
+    border: 1px solid #E3E3E3;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    margin-bottom: 20px;
+    min-height: 20px;
+    padding: 10px;
+}
+
+.entry-comments li {
+    /*background: url("/static/img/hr.png") repeat-x scroll 0 100% transparent;*/
+    border-bottom: 1px dashed #DDDDDD;
+    margin: 0 0 10px;
+    padding: 10px 0;
+}
+
+.comment{
+    /*background: url("/static/img/hr.png") repeat-x scroll 0 100% transparent;*/
+    border-bottom: 1px dashed #DDDDDD;
+    margin: 0 0 10px;
+    padding: 10px 0;
+}
+
+.entry-comments ul {
+    list-style: none outside none;
+}
+
+/* ---------header----------------------------*/
+.site-title {
+    text-align: left;
+    font-size: 1.857142857rem;
+    line-height: 1.846153846;
+    margin-bottom: 0;
+    color:#EB8D00
+}
+
+.site-description {
+    font-weight: normal;
+    font-size: 0.928571429rem;
+    line-height: 15px;
+    color: #EB8D00;
+}
+/* ---------navigation----------------------------*/
+.navbar-inner
+{
+    border: 1px solid #EB8D00;
+}
+.navbar .nav > li > a:focus,
+.navbar .nav > li > a:hover {
+  color: #EB8D00;
+}
+a.brand:hover {
+    background-color: #EB8D00;
+    color: #ffffff;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus{
+  background-color: #EB8D00;
+  background-image: linear-gradient(to bottom, #EB8D00, #EB8D00);
+}
+/* ---------post----------------------------*/
+.post h2 {
+    color: #666666;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFF;
+}
+/* ---------comments----------------------------*/
+
+
+/* ---------sidebar----------------------------*/
+
+ul.navigation li {
+    background: url("/static/img/sidebar-list-icon.png") no-repeat scroll 0 10px transparent;
+    display: block;
+    list-style: none outside none;
+    margin-left: -15px;
+    padding: 3px 0 3px 13px;
+}
+
+ul.navigation li a {
+    display: block;
+    text-decoration: none;
+}
+
+.related-header {
+  padding: 8px 15px;
+  list-style: none;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  color:#CC6714
+}
+
+/* ---------pagination----------------------------*/
+.pagination ul li a {
+    background-color: #F8F8F8;
+    background-image: linear-gradient(to bottom, #FFFFFF, #EEEEEE);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-radius: 5px 5px 5px 5px;
+    color: #444444;
+    line-height: 32px;
+    margin-right: 0.5em;
+    padding: 0 10px;
+    text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25);
+}
+.pagination ul li a:hover {
+    background-color: #EEEEEE;
+    background-image: linear-gradient(to bottom, #F5F5F5, #E4E4E4);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    color: #444444;
+    text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25);
+}
+.pagination ul li.active a {
+    background-color: #EB8D00;
+    background-image: linear-gradient(to bottom, #FF9900, #CC7A00);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset;
+    color: #FFFFFF;
+    font-weight: 600;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.pagination ul li:first-child a, .pagination ul li:last-child a {
+    border-radius: 5px 5px 5px 5px;
+}
+
+
+/*-------------------footer css ----------------*/
+.logos_3rd {
+	margin: 1em 1em 0 0;
+	text-align: center;
+}
+
+.logos_3rd a{
+    /*margin left right: 1em;*/
+    margin: 0 1em;
+}
+
+#footer {
+	text-align: center;
+}

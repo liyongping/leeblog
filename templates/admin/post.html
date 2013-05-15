@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content-nav %}
+	<ul class="breadcrumb">
+		<li>
+			<a href="/admin/home">Home</a> <span class="divider">/</span>
+		</li>
+		<li>
+			<a href="/admin/post/list">Post</a>
+		</li>
+		<li class="pull-right">
+			<i class="icon-arrow-left"></i>
+			<a href="/admin/home">Return to Home</a>
+		</li>
+	</ul>
+{% end %}
+
+{% block content-header %}
+	<div class="box-header " data-original-title>
+		
+	</div>
+{% end %}
+
+{% block content-body %}
+	<div class="box-content">
+		<a href="/admin/post/add"><i class="icon-pencil"></i>Write an article</a>
+		<hr>
+		<table class="table">
+			<thead>
+			  <tr>
+				  <th>Title</th>
+				  <th>Arthor</th>
+				  <th>Comment</th>
+				  <th>Date</th>
+				  <th>Action</th>
+			  </tr>
+			</thead>   
+			<tbody>
+			{% for post in posts %}
+				<tr>
+				<td>{{ post.title }}</td>
+				<td>{{ post.authorname }}</td>
+				<td>{{ post.comment_count }}</td>
+				<td class="center">{{ post.date }}</td>
+				<td class="center">
+					<a class="btn btn-info" href="/admin/post/edit/{{ post.id }}">
+						<i class="icon-edit icon-white"></i>  
+						Edit                                            
+					</a>
+					<a class="btn btn-danger" href="/admin/post/delete/{{ post.id }}">
+						<i class="icon-trash icon-white"></i> 
+						Delete
+					</a>
+				</td>
+				
+				</tr>
+			{% end %}
+			</tbody>
+			</table>
+	</div>
+{% end %}

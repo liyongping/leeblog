@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content-nav %}
+	<ul class="breadcrumb">
+		<li>
+			<a href="/admin/home">Home</a> <span class="divider">/</span>
+		</li>
+		<li>
+			<a href="/home/category/list">Category</a>
+		</li>
+		<li class="pull-right">
+			<i class="icon-arrow-left"></i>
+			<a href="/admin/home">Return to Home</a>
+		</li>
+	</ul>
+{% end %}
+
+{% block content %}
+<div class="row-fluid sortable ui-sortable">
+<div class="box span6">
+	<div class="box-header " data-original-title>	
+	</div>
+	
+	<div class="box-content">
+		<legend>Category</legend>
+		<table class="table">
+			<thead>
+			  <tr>
+				  <th>Name</th>
+				  <th>Slug</th>
+				  <th>Description</th>
+				  <th>Count</th>
+				  <th>Actions</th>
+			  </tr>
+			</thead>   
+			<tbody>
+			{% for category in categorys %}
+				{% if category.parent == 0 %}
+				<tr>
+				<td>{{ category.name }}</td>
+				<td class="center">{{ category.slug }}</td>
+				<td class="center">{{ category.description}}</td>
+				<td class="center">{{ category.count}}</td>
+				<td class="center">
+					<a class="btn btn-info" href="/admin/category/edit/{{ category.id }}">
+						<i class="icon-edit icon-white"></i>  
+						Edit                                            
+					</a>
+					<a class="btn btn-danger" href="/admin/category/delete/{{ category.id }}">
+						<i class="icon-trash icon-white"></i> 
+						Delete
+					</a>
+				</td>
+				</tr>
+					{% comment find the sub-category %}
+					{% for scategory in categorys %}
+						{% if scategory.parent == category.id%}
+							<tr>
+							<td>--- {{ scategory.name }}</td>
+							<td class="center">{{ scategory.slug }}</td>
+							<td class="center">{{ scategory.description}}</td>
+							<td class="center">{{ scategory.count}}</td>
+							<td class="center">
+								<a class="btn btn-info" href="/admin/category/edit/{{ scategory.id }}">
+									<i class="icon-edit icon-white"></i>  
+									Edit                                            
+								</a>
+								<a class="btn btn-danger" href="/admin/category/delete/{{ scategory.id }}">
+									<i class="icon-trash icon-white"></i> 
+									Delete
+								</a>
+							</td>
+							</tr>
+						{% end %}
+					{% end %}
+				{% end %}
+			{% end %}
+			</tbody>
+			</table>
+	</div>
+</div>
+
+<div class="box span6">
+	<div class="box-header " data-original-title>	
+	</div>
+	
+	<div class="box-content">
+	<form action="/admin/category/add" class="form-horizontal" method="post">
+	{% module xsrf_form_html() %}
+	{% autoescape None %}
+	  <fieldset>
+		<legend>Add a new Category</legend>
+
+		<div class="control-group error">
+		  {{ form.name.label(class_="control-label") }}
+		  <div class="controls">
+			{{ form.name(class_="typeahead") }}
+			{% if form.name.errors %}
+			<span class="help-inline">{% for error in form.name.errors %}{{ error }}{% end %}</span>
+			{% end %}
+		  </div>
+		</div>
+		<div class="control-group">
+		  {{ form.parent.label(class_="control-label") }}
+		  <div class="controls">
+		  	 {{ form.parent() }}
+		  </div>
+		</div>       
+		<div class="control-group">
+		  {{ form.description.label(class_="control-label") }}
+		  <div class="controls">
+			{{ form.description(class_="typeahead", rows='4',cols='80%') }}
+		  </div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+		  <button type="reset" class="btn">Cancel</button>
+		  <button type="submit" class="btn btn-primary">Save changes</button>
+		  </div>
+		</div>
+	  </fieldset>
+	</form>
+	</div>
+</div>
+</div>
+{% end %}

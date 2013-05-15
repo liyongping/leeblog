@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content-nav %}
+	<ul class="breadcrumb">
+		<li>
+			<a href="/admin/home">Home</a> <span class="divider">/</span>
+		</li>
+		<li>
+			<a href="/home/page">Page</a>
+		</li>
+		<li class="pull-right">
+			<i class="icon-arrow-left"></i>
+			<a href="/admin/home">Return to Home</a>
+		</li>
+	</ul>
+{% end %}
+
+{% block content-header %}
+	<div class="box-header " data-original-title>
+		
+	</div>
+{% end %}
+
+{% block content-body %}
+	<div class="box-content">
+		<a href="/admin/page/add"><i class="icon-pencil"></i> New Page</a>
+		<hr>
+		<table class="table">
+			<thead>
+			  <tr>
+				  <th>Title</th>
+				  <th>Order</th>
+				  <th>Date</th>
+				  <th>Status</th>
+				  <th>Actions</th>
+			  </tr>
+			</thead>   
+			<tbody>
+			{% for page in pages %}
+				{% if page.parent == 0 %}
+				<tr>
+				<td>{{ page.title }}</td>
+				<td>{{ page.order }}</td>
+				<td class="center">{{ page.date }}</td>
+				<td class="center">
+					<span class="label label-success">{{ page.status}}</span>
+				</td>
+				<td class="center">
+					<a class="btn btn-info" href="/admin/page/edit/{{ page.id }}">
+						<i class="icon-edit icon-white"></i>  
+						Edit                                            
+					</a>
+					<a class="btn btn-danger" href="/admin/page/delete/{{ page.id }}">
+						<i class="icon-trash icon-white"></i> 
+						Delete
+					</a>
+				</td>
+				</tr>
+					{% comment find the sub-page %}
+					{% for spage in pages %}
+						{% if spage.parent == page.id%}
+							<tr>
+							<td>--- {{ spage.title }}</td>
+							<td>{{ spage.order }}</td>
+							<td class="center">{{ spage.date }}</td>
+							<td class="center">
+								<span class="label label-success">{{ spage.status}}</span>
+							</td>
+							<td class="center">
+								<a class="btn btn-info" href="/admin/page/edit/{{ spage.id }}">
+									<i class="icon-edit icon-white"></i>  
+									Edit                                            
+								</a>
+								<a class="btn btn-danger" href="/admin/page/delete/{{ spage.id }}">
+									<i class="icon-trash icon-white"></i> 
+									Delete
+								</a>
+							</td>
+							</tr>
+						{% end %}
+					{% end %}
+				{% end %}
+			{% end %}
+			</tbody>
+			</table>
+	</div>
+{% end %}

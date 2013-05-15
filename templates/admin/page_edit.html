@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block other-css %}
+<link href="/static/ckeditor/contents.css" rel="stylesheet">
+{% end %}
+
+{% block content-nav %}
+	<ul class="breadcrumb">
+		<li>
+			<a href="/admin/home">Home</a> <span class="divider">/</span>
+		</li>
+		<li>
+			<a href="/admin/post/add">Publish</a>
+		</li>
+		<li class="pull-right">
+			<i class="icon-arrow-left"></i>
+			<a href="/admin/page/list">Return to page list</a>
+		</li>
+	</ul>
+{% end %}
+
+{% block content-header %}
+	<div class="box-header " data-original-title>
+		
+	</div>
+{% end %}
+
+{% block content-body %}
+	<div class="box-content">
+	<form action="/admin/page/edit/{{ current.id }}" class="form-horizontal" method="post">
+	{% module xsrf_form_html() %}
+	{% autoescape None %}
+	  <fieldset>
+		<legend>Edit this page</legend>
+
+		<div class="control-group error">
+		  {{ form.title.label(class_="control-label") }}
+		  <div class="controls">
+			{{ form.title(class_="span6 typeahead") }}
+			{% if form.title.errors %}
+			<span class="help-inline">{% for error in form.title.errors %}{{ error }}{% end %}</span>
+			{% end %}
+		  </div>
+		</div>
+		<div class="control-group">
+		  {{ form.parent.label(class_="control-label") }}
+		  <div class="controls">
+		  	 {{ form.parent() }}
+		  </div>
+		</div>
+		<div class="control-group">
+          {{ form.order.label(class_="control-label") }}
+          <div class="controls">
+            {{ form.order(class_="span1 typeahead") }}
+            {% if form.order.errors %}
+            <span class="help-inline">{% for error in form.order.errors %}{{ error }}{% end %}</span>
+            {% end %}
+          </div>
+        </div>
+		<div class="control-group">
+		  {{ form.description.label(class_="control-label") }}
+		  <div class="controls">
+			{{ form.description(class_="ckeditor") }}
+		  </div>
+		</div>
+		<div class="form-actions control-group">
+			<div class="controls">
+		  <button type="reset" class="btn">Cancel</button>
+		  <button type="submit" class="btn btn-primary">Save changes</button>
+		  </div>
+		</div>
+	  </fieldset>
+	</form>
+	</div>
+{% end %}
+
+{% block other-javascript %}
+<script src="/static/ckeditor/ckeditor.js"></script>
+{% end %}

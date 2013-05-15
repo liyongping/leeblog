@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>Idea login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="../../static/css/bootstrap.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<div class="wrap">
+<div class="container">
+
+	<div class="loginform" style="width: 270px">
+		<form action="/admin/login" class="form-signin" method="post">
+			{% module xsrf_form_html() %}
+			{% autoescape None %}
+			<div class="placeholding-input username">
+				{{ loginform.username.label }}
+				{{ loginform.username }}
+				{% if loginform.username.errors %}
+				    <ul class="text-error">{% for error in loginform.username.errors %}<li>{{ error }}</li>{% end %}</ul>
+				{% end %}
+			</div>
+			
+			<div class="placeholding-input password flex-table-form">
+				{{ loginform.password.label }}
+				{{ loginform.password }}
+				{% if loginform.password.errors %}
+                    <ul class="text-error">{% for error in loginform.password.errors %}<li>{{ error }}</li>{% end %}</ul>
+                {% end %}
+			</div>
+			
+			<div class="remember-forgot">
+				<label class="checkbox">
+					<input type="checkbox" value="1" name="remember_me">Remember me
+					<a class="forgot" href="/admin/account/resend_password">Forgot password?</a>
+				</label>
+			</div>
+			<button type="submit" class="submit btn">
+				Sign in
+			</button>
+		</form>
+		<div id="backtoblog">
+			<a href="/" title="return to home">--return to home</a>
+		</div>
+    </div>
+</div> <!-- container -->
+</div> <!-- wrap -->
+<script src="/static/js/jquery1.9.1.js"></script>
+<script  type="text/javascript">
+	$(window).resize(function(){
+		$('.loginform').css({
+			position:'absolute',
+			left: ($(window).width() - $('.loginform').outerWidth())/2,
+			top: ($(window).height() - $('.loginform').outerHeight())/2 + $(document).scrollTop()
+		});
+	});
+	$(window).resize();
+</script>
+</body>
+</html>
