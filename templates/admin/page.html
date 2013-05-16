@@ -62,6 +62,7 @@
 					{% for spage in pages %}
 						{% if spage.parent == page.id%}
 							<tr>
+							<td>{{ page.id }}</td>
 							<td>--- {{ spage.title }}</td>
 							<td>{{ spage.order }}</td>
 							<td class="center">{{ spage.date }}</td>
