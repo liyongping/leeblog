@@ -1,0 +1,10 @@
+---
+name: leeblog
+version: 1
+
+worker: tornado | wsgi
+
+libraries:
+- name: tornado
+  version: "2.4.1"
+...
