@@ -42,6 +42,7 @@ class BaseHandler(tornado.web.RequestHandler):
         
         return self.render_string(CURRENT_TEMPLATE_NAME+'/404.html',
                                   setting=self.options,
+                                  user=self.current_user,
                                   navlist = GetNavList(pagelist),
                                   categorylist = categorys,
                                   taglist = tags,
