@@ -28,6 +28,7 @@
 		<table class="table">
 			<thead>
 			  <tr>
+			  	  <th>ID</th>
 				  <th>Title</th>
 				  <th>Order</th>
 				  <th>Date</th>
@@ -39,7 +40,8 @@
 			{% for page in pages %}
 				{% if page.parent == 0 %}
 				<tr>
-				<td>{{ page.title }}</td>
+				<td>{{ page.id }}</td>
+				<td><a href="/post/page/{{ page.id }}" target="_blank">{{ page.title }}</a></td>
 				<td>{{ page.order }}</td>
 				<td class="center">{{ page.date }}</td>
 				<td class="center">

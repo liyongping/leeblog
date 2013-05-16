@@ -1,13 +1,10 @@
 #-*-coding:utf-8-*-
 
 from iwtform import Form
-from wtforms import TextField, PasswordField, TextAreaField, validators
-from wtforms.validators import Required, Length, InputRequired, EqualTo
-from wtforms.fields import RadioField, IntegerField
+from wtforms import TextField, PasswordField, TextAreaField
+from wtforms.validators import Length, InputRequired, EqualTo
+from wtforms.fields import IntegerField, DateField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-
-from sqlalchemy.orm import scoped_session, sessionmaker
-from module.models import engine, User, Post, Term, Comment
 
 class AdminLoginForm(Form):
     username = TextField('Username', [InputRequired(),Length(max=32)])
@@ -18,7 +15,7 @@ class PostAddForm(Form):
     parent = QuerySelectField(get_label='title', allow_blank=True, blank_text=u'Default')
     content = TextAreaField('Content', [InputRequired(),Length(min=1)])
     excerpt = TextAreaField('Except')
-    date = TextField('Date')
+    date = DateField('Date', [InputRequired()])
 
 class PageAddForm(Form):
     title = TextField('Name', [InputRequired(),Length(min=1, max=20)])

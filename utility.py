@@ -31,3 +31,9 @@ class DictSerializable(object):
         for key in self.__mapper__.c.keys():
             result[key] = getattr(self, key)
         return result
+
+def GetDatetimeFromDatenow(datenow, now = datetime.datetime.now()):
+    '''
+            通过date对象和time对象构造出一个新的datetime
+    '''
+    return datetime.datetime.combine(datenow,datetime.time(now.hour,now.minute,now.second))

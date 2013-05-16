@@ -1,12 +1,14 @@
 #-*-coding:utf-8-*-
 
 import hashlib
+import datetime
 
 from tornado.web import authenticated
 from handler.base import BaseHandler
 
 from module.models import User, Post, Term, Term_Relationship, Options
 from form.forms import AdminLoginForm, PageAddForm, TermAddForm, PostAddForm, UserEditForm
+from utility import GetDatetimeFromDatenow
 
 class AmdinLoginHandler(BaseHandler):
     def get(self):
@@ -185,6 +187,7 @@ class AmdinPostAddHandler(BaseHandler):
     @authenticated
     def get(self):
         form = PostAddForm(self)
+        form.date.process_data(datetime.date.today())
         form.parent.query = self.db.query(Post).filter(Post.status=='enabled').filter(Post.type=='page').order_by(Post.title)
         return self.render('admin/post_add.html',form=form, setting=self.options)
     @authenticated
@@ -193,6 +196,7 @@ class AmdinPostAddHandler(BaseHandler):
         form.parent.query = self.db.query(Post).filter(Post.status=='enabled').filter(Post.type=='page').order_by(Post.title)
         if form.validate():
             title = form.title.data
+            datetime_now = GetDatetimeFromDatenow(form.date.data)
             content = form.content.data
             parent = form.parent.data.id if form.parent.data else 0
             new_tags =[]
@@ -204,7 +208,7 @@ class AmdinPostAddHandler(BaseHandler):
             post = Post(title=title, content=content, parent=parent, 
                         author=self.current_user.id, status='enabled', 
                         authorname=self.current_user.displayname,
-                        type='post',
+                        type='post', date=datetime_now,
                         comment_count=0)
             self.db.add(post)
             self.db.commit()
@@ -276,6 +280,7 @@ class AmdinPostEditHandler(BaseHandler):
         current_categorys_str = ",".join(current_categorys)
         form.title.process_data(current.title)
         form.content.process_data(current.content)
+        form.date.process_data(current.date.date())
         form.parent.process_data(self.db.query(Post).get(current.parent))
         form.parent.query = self.db.query(Post).filter(Post.status=='enabled').filter(Post.type=='page').order_by(Post.title)
         return self.render('admin/post_edit.html', form=form, current=current, current_tags=current_tags_str, current_categorys=current_categorys_str, setting=self.options)
@@ -307,6 +312,8 @@ class AmdinPostEditHandler(BaseHandler):
             current.content = content
             current.parent = parent
             current.author = self.current_user.id
+            if current.date.date() != form.date.data:
+                current.date = GetDatetimeFromDatenow(form.date.data,current.date)
             self.db.commit()
             return self.redirect('/admin/post/list')
         return self.render('admin/post_edit.html', form=form, current=current, current_tags=current_tags_str, current_categorys=current_categorys_str, setting=self.options)

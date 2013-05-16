@@ -75,6 +75,20 @@
                   </ul>
               </div>
               <hr />
+			  <div class="row-fluid">
+                  <ul class="nav nav-list">
+                    <li class="nav-header">Date</li>
+                    <li>
+                        <div>
+                        {{ form.date(id="datepicker", class_="input-medium") }}
+                        {% if form.date.errors %}
+							<span class="help-inline">{% for error in form.date.errors %}{{ error }}{% end %}</span>
+						{% end %}
+                        </div>
+                    </li>
+                  </ul>
+              </div>
+              <hr />
               <div class="row-fluid">
                   <ul class="nav nav-list">
                     <li class="nav-header">Parent Page</li>
@@ -93,6 +107,8 @@
 
 {% block other-javascript %}
 <script src="/static/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script type="text/javascript">
     function set_current_category () {
       categorys = $("#old_post_category_value").val();
@@ -110,5 +126,14 @@
     {
         updateCategoryList(set_current_category);
     });
+    $(function() {
+		$( "#datepicker" ).datepicker({
+			showOtherMonths: true,
+			selectOtherMonths: true,
+			changeMonth: true,
+			changeYear: true,
+			dateFormat: 'yy-mm-dd'
+		});
+	});
 </script>
 {% end %}

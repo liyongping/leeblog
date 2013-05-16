@@ -28,6 +28,7 @@
 		<table class="table">
 			<thead>
 			  <tr>
+			  	  <th>ID</th>
 				  <th>Title</th>
 				  <th>Arthor</th>
 				  <th>Comment</th>
@@ -38,6 +39,7 @@
 			<tbody>
 			{% for post in posts %}
 				<tr>
+				<td>{{ post.id }}</td>
 				<td><a href="/post/id/{{ post.id }}" target="_blank">{{ post.title }}</a></td>
 				<td>{{ post.authorname }}</td>
 				<td>{{ post.comment_count }}</td>
