@@ -63,7 +63,7 @@
 						{% if spage.parent == page.id%}
 							<tr>
 							<td>{{ page.id }}</td>
-							<td>--- {{ spage.title }}</td>
+							<td><a href="/post/page/{{ spage.id }}" target="_blank">--- {{ spage.title }}</a></td>
 							<td>{{ spage.order }}</td>
 							<td class="center">{{ spage.date }}</td>
 							<td class="center">
