@@ -7,4 +7,14 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
+	
 };
+
+CKEDITOR.inline('inline_edit', {
+    extraPlugins: 'fastimage'
+});
+
+CKEditor.replace('textareaId', {
+        "extraPlugins": "imagebrowser",
+        "imageBrowser_listUrl": "/path/to/images_list.json"
+});
