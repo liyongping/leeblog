@@ -1,11 +1,11 @@
 #-*-coding:utf-8-*-
 
 import os
-import tornado.web
+
 import tornado.wsgi
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from settings import LISTEN_PORT, DEBUG
+from settings import DEBUG
 from module.models import engine
 from handler.admin import *
 from handler.content import *
@@ -46,7 +46,7 @@ settings = dict(
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             #ui_modules={"Entry": EntryModule},
             xsrf_cookies=True,
-            cookie_secret="66oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
+            cookie_secret="88oETzKXQAGaYdkL6gEmGeJJFYYh7EQnp3XdTP1o/Vo=",
             login_url="/admin/login",
             debug=DEBUG,
         )
