@@ -38,21 +38,20 @@
 			<tbody>
 			{% for post in posts %}
 				<tr>
-				<td>{{ post.title }}</td>
+				<td><a href="/post/id/{{ post.id }}" target="_blank">{{ post.title }}</a></td>
 				<td>{{ post.authorname }}</td>
 				<td>{{ post.comment_count }}</td>
 				<td class="center">{{ post.date }}</td>
 				<td class="center">
 					<a class="btn btn-info" href="/admin/post/edit/{{ post.id }}">
-						<i class="icon-edit icon-white"></i>  
+						<i class="icon-edit icon-white"></i>
 						Edit                                            
 					</a>
 					<a class="btn btn-danger" href="/admin/post/delete/{{ post.id }}">
-						<i class="icon-trash icon-white"></i> 
+						<i class="icon-trash icon-white"></i>
 						Delete
 					</a>
 				</td>
-				
 				</tr>
 			{% end %}
 			</tbody>

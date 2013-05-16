@@ -5,7 +5,7 @@ LISTEN_PORT = 8080
 
 # db settting
 if DEBUG:
-    DB_CONNECT_STRING = 'mysql://root:123456@localhost:3306/app_leeblog?charset=utf8'
+    DB_CONNECT_STRING = 'mysql://root:34497267@localhost:3306/app_leeblog?charset=utf8'
 else:
     import sae.const
     #sae.const.MYSQL_DB      # 数据库名
@@ -14,7 +14,7 @@ else:
     #sae.const.MYSQL_HOST    # 主库域名（可读写）
     #sae.const.MYSQL_PORT    # 端口，类型为，请根据框架要求自行转换为int
     #sae.const.MYSQL_HOST_S  # 从库域名（只读）
-    DB_CONNECT_STRING = 'mysql://root:123456@localhost:3306/app_leeblog?charset=utf8'
+    DB_CONNECT_STRING = 'mysql://root:34497267@localhost:3306/app_leeblog?charset=utf8'
     #DB_CONNECT_STRING = 'mysql://'+sae.const.MYSQL_USER+':'+sae.const.MYSQL_PASS+'@'+sae.const.MYSQL_HOST+':'+sae.const.MYSQL_PORT+'/'+sae.const.MYSQL_DB+'?charset=utf8'
 DB_ECHO = False
 DB_ENCODING = 'utf-8'

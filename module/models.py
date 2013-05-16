@@ -172,7 +172,7 @@ def main():
     db.add(user)
     
     post = Post(title=u'第一篇文章哦',
-                content=u'欢迎大家使用leeblog博客系统',
+                content=u'欢迎使用leeblog博客系统',
                 authorname='admin')
     db.add(post)
     
@@ -182,8 +182,8 @@ def main():
     db.add(term)
     db.commit()
     
-    db.add_all([Options(key='blogname', value='blog title'),
-                Options(key='blogdescription', value='One blog site'),
+    db.add_all([Options(key='blogname', value='Lee Blog'),
+                Options(key='blogdescription', value=u'欢迎使用leeblog博客系统'),
                 Options(key='users_can_register', value='0'),
                 Options(key='admin_email', value='test@example.com'),
                 Options(key='comments_notify', value='0'),
