@@ -29,7 +29,9 @@
 					{% end %}
 				</ul>
 				<ul class="nav pull-right" id="main-menu-right">
-					<li><a rel="tooltip" href="/admin/login" title="">Login <i class="icon-share-alt"></i></a></li>
+					<li>
+					    <a rel="tooltip" href="/admin/login" title="">{% if user %}Admin{% else %}Login{% end %}<i class="icon-share-alt"></i></a>
+					</li>
 				</ul>
 			</div>
 		</div>

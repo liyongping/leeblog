@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block meta %}
+    <title>{{ article.title }} | leeblog| vincent博客</title>
+    <meta name="description" content="欢迎大家来到leeblog">
+    <meta name="keywords" content="leeblog,c++,c,python,shell,java,c#,linux,windows">
+{% end %}
+
 {% block content-main %}
 <div id="main" class="span9">
 	<div class="post" id="post-{{ article.id }}">

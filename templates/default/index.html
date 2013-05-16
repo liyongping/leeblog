@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block meta %}
+    <title>{{ setting['blogname'] }}</title>
+{% end %}
+
 {% block content-main %}
 <div id="main" class="span9">
 	{# 每个文章摘要 #}
