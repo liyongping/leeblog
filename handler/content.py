@@ -28,9 +28,9 @@ class MainHandler(BaseHandler):
         # get all pages
         pagelist = self.db.query(Post).filter_by(status='enabled', type='page').order_by(Post.order.desc()).all()
         # get all categorys
-        categorys = self.db.query(Term).filter_by(taxonomy='category').order_by(Term.name).all()
+        categorys = self.db.query(Term).filter(Term.count>0).filter_by(taxonomy='category').order_by(Term.name).all()
         # get all tags
-        tags = self.db.query(Term).filter_by(taxonomy='post_tag').order_by(Term.name).all()
+        tags = self.db.query(Term).filter(Term.count>0).filter_by(taxonomy='post_tag').order_by(Term.name).all()
         # get recent latest posts
         recents = self.db.query(Post).filter_by(status='enabled', type='post').order_by(Post.date.desc())
         # get all terms with relationship
@@ -38,6 +38,7 @@ class MainHandler(BaseHandler):
         
         self.render(CURRENT_TEMPLATE_NAME+"/index.html",
                     setting=self.options,
+                    user=self.current_user,
                     navlist = GetNavList(pagelist),
                     categorylist = categorys,
                     taglist = tags,
@@ -137,9 +138,9 @@ class PostByCategoryName(BaseHandler):
         # get all pages
         pagelist = self.db.query(Post).filter_by(status='enabled', type='page').order_by(Post.order.desc()).all()
         # get all categorys
-        categorys = self.db.query(Term).filter_by(taxonomy='category').order_by(Term.name).all()
+        categorys = self.db.query(Term).filter(Term.count>0).filter_by(taxonomy='category').order_by(Term.name).all()
         # get all tags
-        tags = self.db.query(Term).filter_by(taxonomy='post_tag').order_by(Term.name).all()
+        tags = self.db.query(Term).filter(Term.count>0).filter_by(taxonomy='post_tag').order_by(Term.name).all()
         # get recent latest posts
         recents = self.db.query(Post).filter_by(status='enabled', type='post').order_by(Post.date.desc())
         # get all terms with relationship
@@ -147,6 +148,7 @@ class PostByCategoryName(BaseHandler):
         
         self.render(CURRENT_TEMPLATE_NAME+"/index.html",
                     setting=self.options,
+                    user=self.current_user,
                     navlist = GetNavList(pagelist),
                     categorylist = categorys,
                     taglist = tags,
@@ -180,9 +182,9 @@ class PostByTagName(BaseHandler):
         # get all pages
         pagelist = self.db.query(Post).filter_by(status='enabled', type='page').order_by(Post.order.desc()).all()
         # get all categorys
-        categorys = self.db.query(Term).filter_by(taxonomy='category').order_by(Term.name).all()
+        categorys = self.db.query(Term).filter(Term.count>0).filter_by(taxonomy='category').order_by(Term.name).all()
         # get all tags
-        tags = self.db.query(Term).filter_by(taxonomy='post_tag').order_by(Term.name).all()
+        tags = self.db.query(Term).filter(Term.count>0).filter_by(taxonomy='post_tag').order_by(Term.name).all()
         # get recent latest posts
         recents = self.db.query(Post).filter_by(status='enabled', type='post').order_by(Post.date.desc())
         # get all terms with relationship
@@ -190,6 +192,7 @@ class PostByTagName(BaseHandler):
         
         self.render(CURRENT_TEMPLATE_NAME+"/index.html",
                     setting=self.options,
+                    user=self.current_user,
                     navlist = GetNavList(pagelist),
                     categorylist = categorys,
                     taglist = tags,
@@ -207,9 +210,9 @@ class PostById(BaseHandler):
         # get all pages
         pagelist = self.db.query(Post).filter_by(status='enabled', type='page').order_by(Post.order.desc()).all()
         # get all categorys
-        categorys = self.db.query(Term).filter_by(taxonomy='category').order_by(Term.name).all()
+        categorys = self.db.query(Term).filter(Term.count>0).filter_by(taxonomy='category').order_by(Term.name).all()
         # get all tags
-        tags = self.db.query(Term).filter_by(taxonomy='post_tag').order_by(Term.name).all()
+        tags = self.db.query(Term).filter(Term.count>0).filter_by(taxonomy='post_tag').order_by(Term.name).all()
         # get post
         post = self.db.query(Post).get(pid)
         # get recent latest posts
@@ -222,6 +225,7 @@ class PostById(BaseHandler):
         
         self.render(CURRENT_TEMPLATE_NAME+"/post.html",
                     setting=self.options,
+                    user=self.current_user,
                     navlist = GetNavList(pagelist),
                     categorylist = categorys,
                     taglist = tags,
@@ -237,9 +241,9 @@ class PostByPageId(BaseHandler):
         # get all pages
         pages = self.db.query(Post).filter_by(status='enabled', type='page').order_by(Post.order.desc()).all()
         # get all categorys
-        categorys = self.db.query(Term).filter_by(taxonomy='category').order_by(Term.name).all()
+        categorys = self.db.query(Term).filter(Term.count>0).filter_by(taxonomy='category').order_by(Term.name).all()
         # get all tags
-        tags = self.db.query(Term).filter_by(taxonomy='post_tag').order_by(Term.name).all()
+        tags = self.db.query(Term).filter(Term.count>0).filter_by(taxonomy='post_tag').order_by(Term.name).all()
         # get the page content as the post content
         post = self.db.query(Post).get(pid)
         # get recent latest posts
@@ -253,6 +257,7 @@ class PostByPageId(BaseHandler):
         
         self.render(CURRENT_TEMPLATE_NAME+"/page.html",
                     setting=self.options,
+                    user=self.current_user,
                     navlist = GetNavList(pages),
                     categorylist = categorys,
                     taglist = tags,
