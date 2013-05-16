@@ -16,3 +16,8 @@ UI:
 -bootstrap 2.3.1 (http://twitter.github.io/bootstrap/index.html)
 
 -SyntaxHighlighter 3.0.83 (http://alexgorbatchev.com/SyntaxHighlighter/download/)
+
+-Jquery 1.9.1 (http://jquery.com/)
+
+-JqueryUI 1.10.3 (http://jqueryui.com/)
+
