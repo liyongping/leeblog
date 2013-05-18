@@ -7,7 +7,7 @@ from handler.base import BaseHandler, GetNavList
 from module.models import Post, Term, Comment, Term_Relationship
 from utility import AlchemyEncoder
 from settings import CURRENT_TEMPLATE_NAME
-
+from handler.stat import GetStatInfo, GetPostStatInfo
 
 class MainHandler(BaseHandler):
     def get(self):
@@ -223,8 +223,12 @@ class PostById(BaseHandler):
         if not post:
             raise HTTPError(404)
         
+        #siteStat = GetStatInfo(self.db)
+        #postStat = GetPostStatInfo(self.db, self.request.uri)
+        
         self.render(CURRENT_TEMPLATE_NAME+"/post.html",
                     setting=self.options,
+                    #stat=dict(siteStat, **postStat),
                     user=self.current_user,
                     navlist = GetNavList(pagelist),
                     categorylist = categorys,

@@ -4,8 +4,8 @@ import datetime
 
 from sqlalchemy.pool import NullPool
 from sqlalchemy.engine import reflection
-from sqlalchemy import Column, Integer, String, \
-    Text, DateTime, create_engine, func
+from sqlalchemy import Column, Integer, SmallInteger, String, Date, Time,\
+    Text, DateTime, create_engine, func, Table
 from sqlalchemy.ext.declarative import declarative_base
 from settings import DB_CONNECT_STRING, DB_ENCODING, DB_ECHO, POOL_RECYCLE
 
@@ -155,9 +155,27 @@ class Options(Base):
     # autoload: yes or no
     autoload = Column(String(20), default='yes', nullable=False) #server_default='yes', 
 
+class StatTrace(Base):
+    __tablename__ = 'stattrace'
+    
+    id = Column(Integer(11), primary_key=True, autoincrement=True)
+    date = Column(Date(), default=func.now(), nullable=False)
+    time = Column(Time(), default=func.now(), nullable=False)
+    ip = Column(String(39), default='')
+    urlrequested = Column(Text, default='')
+    agent = Column(Text, default='')
+    referrer = Column(Text, default='')
+    os = Column(String(128), default='')
+    browser = Column(String(128), default='')
+    searchengine = Column(String(128), default='')
+    spider = Column(String(128), default='')
+    feed = Column(String(128), default='')
+    nation = Column(String(16), default='')
+    realpost = Column(Integer(2), default=1)
+
 def main():
     # delete all tables
-    Base.metadata.drop_all(engine)
+    #Base.metadata.drop_all(engine)
     #create all tables
     Base.metadata.create_all(engine)
     from sqlalchemy.orm import scoped_session, sessionmaker
@@ -205,6 +223,9 @@ def InitTables():
     # determine if it needs to re-create the table.
     if 'user' not in tables:
         main()
+    if 'stattrace' not in tables:
+        StatTrace.__table__.create(engine)
+        
 
 InitTables()
 

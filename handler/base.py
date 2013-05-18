@@ -1,8 +1,11 @@
 #-*-coding:utf-8-*-
 
+import datetime
+
 import tornado.web
-from module.models import  User, Options, Post, Term
+from module.models import  User, Options, Post, Term, StatTrace
 from settings import CURRENT_TEMPLATE_NAME
+from stat import GetSpider, GetBrowser, GetOS, GetSE, GetNation, GetURL, IsFeed, IsSkipedURL, IsPost
 
 class BaseHandler(tornado.web.RequestHandler):
     option_dict = {}
@@ -10,6 +13,42 @@ class BaseHandler(tornado.web.RequestHandler):
     @property
     def db(self):
         return self.application.db
+    
+    def prepare(self):
+        urlrequested = self.request.uri
+        if IsSkipedURL(urlrequested):
+            return None
+        urlrequested = GetURL(urlrequested)
+        date = datetime.date.today()
+        dt = datetime.datetime.now()
+        time = datetime.time(dt.hour,dt.minute,dt.second)
+        ip = self.request.remote_ip
+        headers = self.request.headers
+        referrer = headers['Referer']
+        agent = headers['User-Agent']
+        spider = GetSpider(agent)
+        os = GetOS(agent)
+        browser = GetBrowser(agent)
+        searchengine = GetSE(referrer)
+        nation = GetNation(headers['Accept-Language'], ip)
+        feed = "" #urlrequested if IsFeed(urlrequested) else ''
+        realpost = 1 if IsPost(urlrequested) else 0
+        
+        st = StatTrace(date=date,
+                       time=time,
+                       ip=ip,
+                       urlrequested=urlrequested,
+                       agent=agent,
+                       referrer=referrer,
+                       os=os,
+                       browser=browser,
+                       searchengine=searchengine,
+                       spider=spider,
+                       feed=feed,
+                       nation=nation,
+                       realpost=realpost)
+        self.db.add(st)
+        self.db.commit()
 
     def on_finish(self):
         self.db.close()

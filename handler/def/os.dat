@@ -1,0 +1,214 @@
+Amiga|Amiga|
+Tizen|Tizen|
+jolicloud|Jolicloud|
+MeeGo|MeeGo|
+Maemo|maemo|
+CriOS|CriOS|
+CyanogenMod|CyanogenMod|
+Android Key Lime Pie|Android5.0|
+Android Jelly Bean|Android4.2|
+Android Jelly Bean|Android4.1|
+Android Ice Cream Sandwich|Android4.0|
+Android Honeycomb|Honeycomb|
+Android Honeycomb|Android3|
+Android Gingerbread|Gingerbread|
+Android Gingerbread|Android2.3|
+Android Gingerbread|2.3.4/GRJ22|
+Android FroYo|FroYo|
+Android FroYo|Android2.2|
+Android Eclair|Eclair|
+Android Eclair|Android2.1|
+Android Eclair|Android2|
+Android Donut|Donut|
+Android Donut|Android1.6|
+Android CupCake|CupCake|
+Android CupCake|Android1.5|
+Android 1|Android1|
+Android|Android|
+Arch Linux|ArchLinux|
+Bada 1.0|Bada/1.0|
+Bada 1.2|Bada/1.2|
+Bada 2|Bada/2|
+Bada|Bada|
+Chrome OS|CrOSi686|
+Darwin|Darwin|
+FreeBSD|FreeBSD|
+Gentoo Linux|gentoo|
+Haiku|Haiku|
+HP webOS|hpwOS|
+iOS 3.1|iPhoneOS3_1|
+iOS 3.2|3_2_1likeMacOSX|
+iOS 3.2|3_2_2likeMacOSX|
+iOS 4.0|iPhoneOS4_0|
+iOS 4.1|iPhoneOS4_1|
+iOS 4.2|iPhoneOS4_2|
+iOS 4.2|OS4_2_1likeMacOSX|
+iOS 4.3|iPhoneOS4_3|
+iOS 4.3|4_3_1likeMacOSX|
+iOS 4.3|4_3_3likeMacOSX|
+iOS 4.3|4_3_5likeMacOSX|
+iOS 3|iPhoneOS3|
+iOS 4|iPhoneOS4|
+iOS 5|iPhoneOS5|
+iOS 5|5_0likeMacOSX|
+iOS 5|5_0_1likeMacOSX|
+iOS 5|5_1likeMacOSX|
+iOS 5|5_1_1likeMacOSX|
+iOS 6|iPad;CPUOS6|
+iOS 6|CPUiPhoneOS6|
+iOS 6|6_0_1likeMacOSX|
+iOS 6|6_0_2likeMacOSX|
+IOS 6.1|IOS6.1|
+Knoppix|Knoppix|
+Mac 68K Emulator|68K|
+Mageia|mageia|
+NetBSD|NetBSD|
+OS X Cheetah|MacOSX10_0|
+OS X Cheetah|MacOSX10.0|
+OS X Jaguar|MacOSX10_2|
+OS X Jaguar|MacOSX10.2|
+OS X Leopard|MacOSX10_5|
+OS X Leopard|MacOSX10.5|
+OS X Lion|MacOSX10_7|
+OS X Lion|MacOSX10.7|
+OS X Mountain Lion|MacOSX10_8|
+OS X Mountain Lion|MacOSX10.8|
+OS X Panther|MacOSX10_3|
+OS X Panther|MacOSX10.3|
+OS X Puma|MacOSX10_1|
+OS X Puma|MacOSX10.1|
+OS X Snow Leopard|MacOSX10_6|
+OS X Snow Leopard|MacOSX10.6|
+OS X Tiger|MacOSX10_4|
+OS X Tiger|MacOSX10.4|
+OS X|MacOSX|
+OpenBSD|OpenBSD|
+Red Hat|RedHat|
+SGI Irix|Irix|
+Slackware|Slackware|
+Sun Solaris 7|SunOS5.7|
+Sun Solaris|Solaris|
+Sun Solaris|SunOS|
+Symbian 9|SymbianOS/9|
+Symbian 8|SymbianOS/8|
+Symbian 3|Symbian/3|
+Symbian S60|Series60|
+Symbian|Symbian|
+Kubuntu|Kubuntu|
+Ubuntu Edgy|ubuntu-edgy|
+Ubuntu Edgy|ubuntu/6.10|
+Ubuntu Feisty Fawn|ubuntu-feisty|
+Ubuntu Feisty Fawn|Ubuntu/7.04|
+Ubuntu Hardy Heron|Ubuntu/8.04|
+Ubuntu Intrepid Ibex|Ubuntu/8.10|
+Ubuntu Jaunty Jackalope|Ubuntu/9.25|
+Ubuntu Jaunty Jackalope|Ubuntu/9.04|
+Ubuntu Karmic Koala|Ubuntu/9.10|
+Ubuntu Maverick Meerkat|Ubuntu/10.10| 
+Ubuntu lucid Lynx|Ubuntu/10.04|
+Ubuntu Natty Narwhal|Ubuntu/11.04|
+Ubuntu Oneiric Ocelot|Ubuntu/11.10|
+Ubuntu Precise Pangolin|Ubuntu/12.04|
+Ubuntu Quantal Quetzal|Ubuntu/12.10|
+Ubuntu Raring Ringtail|Ubuntu/13.04|
+Ubuntu Linux|Ubuntu|
+Linux Mandriva|Linux/1.9.2.18-0.1mdv2010.2|
+Linux Mint 9 Isadora|LinuxMint/9Isadora|
+Suse Linux|Suse|
+Debian Linux|Debian|
+Fedora Linux|Fedora|
+Linux|Linux|
+Unix|Unix|
+webOS|webOS|
+WebTV|WebTV|
+Windows|Windows95/98/2000/NT|
+Windows 2000|Windows2000|
+Windows 2000|WindowsNT5.0|
+Windows 3.1|Win3.1|
+Windows RT|WindowsNT6.2;ARM|
+Windows 8|WindowsNT6.2|
+Windows 7|WindowsNT6.1|
+Windows Vista|WindowsNT6.0|
+Windows 95|Win95|
+Windows 95|Windows95|
+Windows 98|Win98|
+Windows 98|Windows98|
+Windows CE|WinCE|
+Windows CE|WindowsCE|
+Windows ME|Win9x4.90|
+Windows ME|WindowsME|
+Windows Server 2003|WindowsNT5.2|
+Windows XP|WindowsNT5.1|
+Windows XP|WindowsXP|
+Windows|Win32|
+Windows NT 4|WindowsNT|
+Windows NT 4|WinNT|
+Windows Phone 8|WindowsPhone8.|
+Windows Phone 8|WindowsPhone8X|
+Windows Phone OS 7|WindowsPhoneOS7|
+Windows Phone OS 6.5|Windows6.5|
+Windows Phone OS|WindowsPhoneOS|
+Windows Mobile|WindowsMobile|
+X Windows System|X11|
+Windows|Windows|
+Google Wireless Transcoder|GoogleWirelessTranscoder|
+ALCATEL one touch|ALCATEL_one_touch|
+PlayBook OS 2.0|PlayBook;U;RIMTabletOS2.0|
+BlackBerry PlayBook OS2|PlayBook;U;RIMTabletOS2.1.0|
+BlackBerry Tablet OS|RIMTabletOS1.0.0|
+BlackBerry OS 4|BlackBerry8520/4|
+BlackBerry OS 5|BlackBerry8520/5|
+BlackBerry OS 5|BlackBerry8900/5|
+BlackBerry OS 4|BlackBerry8900/4|
+BlackBerry OS 5|BlackBerry9300/5|
+BlackBerry OS 5|BlackBerry9700/5|
+BlackBerry OS 5|BlackBerry9000/5|
+BlackBerry OS 6|BlackBerry9700|
+BlackBerry OS 6|BlackBerry9300|
+BlackBerry OS 6|BlackBerry9780|
+BlackBerry OS 6|BlackBerry9800|
+BlackBerry OS 7|BlackBerry9860|
+BlackBerry OS 7|BlackBerry9380|
+BlackBerry OS 7|BlackBerry9360|
+BlackBerry OS 7|BlackBerry9320|
+BlackBerry OS 7|BlackBerry9790|
+BlackBerry OS 7|BlackBerry9810|
+BlackBerry OS 7|BlackBerry9900|
+BlackBerry OS 4|BB4|
+BlackBerry OS 5|BB5|
+BlackBerry OS 6|BB6|
+BlackBerry OS 7|BB7|
+BlackBerry OS 10|BB10|
+BlackBerry|BlackBerry|
+Android HTC|Htcmagic|
+Bada|SAMSUNG-GT-C5212i|
+iPod|iPod|
+iPad|iPad|
+iOS|iPhone|
+LG 320|LG-C320|
+Motorola GLEAM+|WX308|
+Windows Mobile 6.1|SAMSUNG-SGH-i900V/AEHH2|
+Samsung F480|SAMSUNG-SGH-F480|
+Samsung|SAMSUNG|
+Symbian S40|Nokia200|
+Symbian S40|Series40|
+Symbian S40|NokiaC3|
+Symbian S60|NokiaX3|
+Symbian S60|S60;SymbOS|
+Firefox OS|Mobile;|
+Nintendo 3DS|Nintendo3DS|
+Nintendo DSi|NintendoDSi|
+Wii|Wii|
+Nintendo|NINTENDO|
+PS 2|PlayStation2|
+PS 3|PLAYSTATION3|
+PSP 2|PlayStationPortable);2.00|
+PSP|PlayStationPortable|
+PSP Vita|PlaystationVita|
+PSP|PSP|
+Sony Ericsson V600i|SonyEricssonV600i|
+Sony Ericsson W995|SonyEricssonW995|
+XBox|Xbox|
+Java Platform 2 Micro Edition|J2ME/MIDP|
+Java Runtime Environnement|MIDP-2.1configuration/CLDC-1.1|
+|||
