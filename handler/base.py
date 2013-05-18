@@ -24,12 +24,20 @@ class BaseHandler(tornado.web.RequestHandler):
         time = datetime.time(dt.hour,dt.minute,dt.second)
         ip = self.request.remote_ip
         headers = self.request.headers
-        referrer = headers['Referer']
-        agent = headers['User-Agent']
-        spider = GetSpider(agent)
-        os = GetOS(agent)
-        browser = GetBrowser(agent)
-        searchengine = GetSE(referrer)
+        referrer = ''
+        try:
+            referrer = headers['Referer']
+        except:
+            pass
+        agent = ''
+        try:
+            agent = headers['User-Agent']
+        except:
+            pass
+        spider = GetSpider(agent) if len(agent) != 0 else ''
+        os = GetOS(agent) if len(agent) != 0 else ''
+        browser = GetBrowser(agent) if len(agent) != 0 else ''
+        searchengine = GetSE(referrer) if len(referrer) != 0 else ''
         nation = GetNation(headers['Accept-Language'], ip)
         feed = "" #urlrequested if IsFeed(urlrequested) else ''
         realpost = 1 if IsPost(urlrequested) else 0
