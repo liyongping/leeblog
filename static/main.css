@@ -12,17 +12,17 @@ body.custom-font-enabled {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 a {
-    color:#CC6714;
+    color:#EB8D00;
     text-decoration: none;
 }
 
 a:hover {
-    color:#CC6714;
+    color:#EB8D00;
     background-color: #F5F5F5;
 }
 
 a:visited {
-    color:#CC6714;
+    color:#EB8D00;
 }
 
 .site {
@@ -119,6 +119,39 @@ a.brand:hover {
   background-color: #EB8D00;
   background-image: linear-gradient(to bottom, #EB8D00, #EB8D00);
 }
+
+/* ---------post-list----------------------------*/
+.post_date {
+    color: #FFFFFF;
+    float: left;
+    height: 50px;
+    margin-left: -55px;
+    position: absolute;
+    width: 50px;
+}
+
+.post_date span {
+    display: block;
+}
+
+.post_date .date_d {
+    background-color: #EB8D00;
+    font-family: "微软雅黑",Georgia,Arial,Tahoma,Geneva;
+    font-size: 25px;
+    padding: 2px;
+    text-align: center;
+}
+
+.post_date .date_ym {
+    background-color: #EB8D00;
+    color: #FFFFFF;
+    font-family: "微软雅黑",Verdana;
+    font-size: 12px;
+    margin-top: 3px;
+    padding: 2px;
+    text-align: center;
+}
+
 /* ---------post----------------------------*/
 .post h2 {
     color: #666666;
@@ -126,6 +159,7 @@ a.brand:hover {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #FFF;
 }
+
 /* ---------comments----------------------------*/
 
 
@@ -149,7 +183,7 @@ ul.navigation li a {
   list-style: none;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  color:#CC6714
+  color:#EB8D00
 }
 
 /* ---------pagination----------------------------*/
