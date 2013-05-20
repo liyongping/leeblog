@@ -100,6 +100,20 @@
 				</div> <!-- /control-group -->
 				
 				<div class="control-group">
+                    <label for="posts_per_recent_post" class="control-label">显示多少条最新文章</label>
+                    <div class="controls">
+                        <input type="text" value="{% if setting.has_key('posts_per_recent_post') %}{{ setting['posts_per_recent_post']}}{% else %}5{% end %}" id="posts_per_recent_post" name="posts_per_recent_post" class="input-medium">
+                    </div> <!-- /controls -->
+                </div> <!-- /control-group -->
+                
+                <div class="control-group">
+                    <label for="posts_per_recent_comment" class="control-label">显示多少条最新评论</label>
+                    <div class="controls">
+                        <input type="text" value="{% if setting.has_key('posts_per_recent_comment') %}{{ setting['posts_per_recent_comment']}}{% else %}5{% end %}" id="posts_per_recent_comment" name="posts_per_recent_comment" class="input-medium">
+                    </div> <!-- /controls -->
+                </div> <!-- /control-group -->
+				
+				<div class="control-group">
 					<label for="rss_use_excerpt" class="control-label">RSS只使用</label>
 					<div class="controls">
 						<select name="rss_use_excerpt" id="rss_use_excerpt">
@@ -159,6 +173,16 @@
                 range: [1,100]
             },
             posts_per_rss: {
+                required: true,
+                number: true,
+                range: [1,100]
+            },
+            posts_per_recent_post: {
+                required: true,
+                number: true,
+                range: [1,100]
+            },
+            posts_per_recent_comment: {
                 required: true,
                 number: true,
                 range: [1,100]

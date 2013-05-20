@@ -38,7 +38,7 @@ class BaseHandler(tornado.web.RequestHandler):
         os = GetOS(agent) if len(agent) != 0 else ''
         browser = GetBrowser(agent) if len(agent) != 0 else ''
         searchengine = GetSE(referrer) if len(referrer) != 0 else ''
-        nation = GetNation(headers['Accept-Language'], ip)
+        nation = "" #GetNation(headers['Accept-Language'], ip)
         feed = "" #urlrequested if IsFeed(urlrequested) else ''
         realpost = 1 if IsPost(urlrequested) else 0
         
@@ -77,23 +77,6 @@ class BaseHandler(tornado.web.RequestHandler):
         option_list = self.db.query(Options).all()
         self.option_dict = {option.key:option.value for option in option_list}
     
-    def get_error_html(self, status_code, **kwargs):
-        # get all pages
-        pagelist = self.db.query(Post).filter_by(status='enabled', type='page').order_by(Post.order.desc()).all()
-        # get all categorys
-        categorys = self.db.query(Term).filter_by(taxonomy='category').order_by(Term.name).all()
-        # get all tags
-        tags = self.db.query(Term).filter_by(taxonomy='post_tag').order_by(Term.name).all()
-        # get recent latest posts
-        recents = self.db.query(Post).filter_by(status='enabled', type='post').order_by(Post.date.desc())
-        
-        return self.render_string(CURRENT_TEMPLATE_NAME+'/404.html',
-                                  setting=self.options,
-                                  user=self.current_user,
-                                  navlist = GetNavList(pagelist),
-                                  categorylist = categorys,
-                                  taglist = tags,
-                                  recentlist = recents)
 class Navigate:
     def __init__(self, nid, name, parent, have_child):
         self.nid = nid

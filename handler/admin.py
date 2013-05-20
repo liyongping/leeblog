@@ -75,6 +75,14 @@ class AmdinSettingHandler(BaseHandler):
     @authenticated
     def get(self):
         return self.render('admin/setting.html', setting=self.options, success=None)
+    
+    def update_or_add_option(self, key, value):
+        option = self.db.query(Options).filter_by(key=key).first()
+        if option:
+            option.value = value
+        else:
+            self.db.add(Options(key=key, value=value))
+
     @authenticated
     def post(self):
         try:
@@ -88,16 +96,22 @@ class AmdinSettingHandler(BaseHandler):
             default_category = self.request.arguments['default_category'][0]
             users_can_comment = self.request.arguments['users_can_comment'][0]
             posts_per_page = self.request.arguments['posts_per_page'][0]
-            self.db.add_all([Options(key='blogname', value=blogname),
-                Options(key='blogdescription', value=blogdescription),
-                Options(key='users_can_register', value=users_can_register),
-                Options(key='admin_email', value=admin_email),
-                Options(key='comments_notify', value=comments_notify),
-                Options(key='posts_per_rss', value=posts_per_rss),
-                Options(key='rss_use_excerpt', value=rss_use_excerpt),
-                Options(key='default_category', value=default_category),
-                Options(key='users_can_comment', value=users_can_comment),
-                Options(key='posts_per_page', value=posts_per_page)])
+            posts_per_recent_post = self.request.arguments['posts_per_recent_post'][0]
+            posts_per_recent_comment = self.request.arguments['posts_per_recent_comment'][0]
+            
+            self.update_or_add_option('blogname',blogname)
+            self.update_or_add_option('blogdescription',blogdescription)
+            self.update_or_add_option('users_can_register',users_can_register)
+            self.update_or_add_option('admin_email',admin_email)
+            self.update_or_add_option('comments_notify',comments_notify)
+            self.update_or_add_option('posts_per_rss',posts_per_rss)
+            self.update_or_add_option('rss_use_excerpt',rss_use_excerpt)
+            self.update_or_add_option('default_category',default_category)
+            self.update_or_add_option('users_can_comment',users_can_comment)
+            self.update_or_add_option('posts_per_page',posts_per_page)
+            self.update_or_add_option('posts_per_recent_post',posts_per_recent_post)
+            self.update_or_add_option('posts_per_recent_comment',posts_per_recent_comment)
+
             self.db.commit()
             self.update_options()
         except:

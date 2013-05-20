@@ -2,6 +2,7 @@
 
 import datetime
 
+from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.pool import NullPool
 from sqlalchemy.engine import reflection
 from sqlalchemy import Column, Integer, SmallInteger, String, Date, Time,\
@@ -173,34 +174,75 @@ class StatTrace(Base):
     nation = Column(String(16), default='')
     realpost = Column(Integer(2), default=1)
 
-def main():
+def InitTables():
     # delete all tables
     #Base.metadata.drop_all(engine)
     #create all tables
-    Base.metadata.create_all(engine)
-    from sqlalchemy.orm import scoped_session, sessionmaker
-
+    #Base.metadata.create_all(engine)
     db = scoped_session(sessionmaker(bind=engine))
-    user = User(loginname = 'admin',
-                displayname = 'admin',
-                password = '123456',
-                status = 'enabled',
-                priviledge=0,
-                email = 'test@example.com')
-    db.add(user)
+    tables = reflection.Inspector.from_engine(engine).get_table_names()
     
-    post = Post(title=u'第一篇文章哦',
-                content=u'欢迎使用leeblog博客系统',
-                authorname='admin')
-    db.add(post)
+    default_category = 1
     
-    term = Term(name=u'未分类',
+    # determine if it needs to re-create the table.
+    if 'user' not in tables:
+        User.__table__.create(engine)
+        user = User(loginname = 'admin',
+                        displayname = 'admin',
+                        password = '123456',
+                        status = 'enabled',
+                        priviledge=0,
+                        email = 'test@example.com')
+        db.add(user)
+        db.commit()
+    
+    tables = reflection.Inspector.from_engine(engine).get_table_names()
+    if 'usermeta' not in tables:
+        UserMeta.__table__.create(engine)
+
+    tables = reflection.Inspector.from_engine(engine).get_table_names()
+    if 'post' not in tables:
+        Post.__table__.create(engine)
+        post = Post(title=u'第一篇文章哦',
+                        content=u'欢迎使用leeblog博客系统',
+                        authorname='admin')
+        db.add(post)
+        db.commit()
+    
+    tables = reflection.Inspector.from_engine(engine).get_table_names()
+    if 'postmeta' not in tables:
+        PostMeta.__table__.create(engine)
+    
+    tables = reflection.Inspector.from_engine(engine).get_table_names()
+    if 'comment' not in tables:
+        Comment.__table__.create(engine)
+    
+    tables = reflection.Inspector.from_engine(engine).get_table_names()
+    if 'commentmeta' not in tables:
+        CommentMeta.__table__.create(engine)
+
+    tables = reflection.Inspector.from_engine(engine).get_table_names()
+    if 'link' not in tables:
+        Link.__table__.create(engine)
+    
+    tables = reflection.Inspector.from_engine(engine).get_table_names()
+    if 'term' not in tables:
+        Term.__table__.create(engine)
+        term = Term(name=u'未分类',
                 slug='uncategoried',
                 taxonomy='category');
-    db.add(term)
-    db.commit()
+        db.add(term)
+        db.commit()
+        default_category = term.id
+        
+    tables = reflection.Inspector.from_engine(engine).get_table_names()
+    if 'term_relationship' not in tables:
+        Term_Relationship.__table__.create(engine)
     
-    db.add_all([Options(key='blogname', value='Lee Blog'),
+    tables = reflection.Inspector.from_engine(engine).get_table_names()
+    if 'options' not in tables:
+        Options.__table__.create(engine)
+        db.add_all([Options(key='blogname', value='Lee Blog'),
                 Options(key='blogdescription', value=u'欢迎使用leeblog博客系统'),
                 Options(key='users_can_register', value='0'),
                 Options(key='admin_email', value='test@example.com'),
@@ -208,28 +250,24 @@ def main():
                 Options(key='posts_per_rss', value='10'),
                 Options(key='rss_use_excerpt', value='0'),
                 # 缺省的文章是未分类
-                Options(key='default_category', value=term.id),
+                Options(key='default_category', value=default_category),
                 # 是否允许评论
                 Options(key='users_can_comment', value='1'),
+                # 每页最多显示多少条文章
                 Options(key='posts_per_page', value='10'),
+                Options(key='posts_per_recent_post', value='10'),
+                Options(key='posts_per_recent_comment', value='10'),
                 Options(key='mailserver_url', value='mail.example.com'),
                 Options(key='mailserver_login', value='login@example.com'),
                 Options(key='mailserver_pass', value='password'),
                 Options(key='mailserver_port', value='110')])
-    db.commit()
-
-def InitTables():
+        db.commit()
     tables = reflection.Inspector.from_engine(engine).get_table_names()
-    # determine if it needs to re-create the table.
-    if 'user' not in tables:
-        main()
     if 'stattrace' not in tables:
         StatTrace.__table__.create(engine)
-        
 
 InitTables()
 
 if __name__ == '__main__':
-    #engine = create_engine(DB_CONNECT_STRING, encoding=DB_ENCODING, echo=DB_ECHO)
-    #main()
+    #InitTables()
     pass

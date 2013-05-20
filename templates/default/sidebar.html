@@ -1,7 +1,7 @@
 <div class="radiuswell">
     <div class="related-header">最新文章</div>
     <ul class="navigation">
-      {% for post in recentlist %}
+      {% for post in recentPostList %}
       	<li><a href="/post/id/{{ post.id }}" title="{{ post.title }}">{{ post.title }}</a></li>
       {% end %}
     </ul>
@@ -33,4 +33,13 @@
         <a href="/post/tag/{{ tag.slug }}/" title="{{ tag.name }}">{{ tag.name }}&nbsp;({{ tag.count }})</a>
       {% end %}
     </div>
+</div><!--/.well -->
+
+<div class="radiuswell">
+    <div class="related-header">最新评论</div>
+    <ul class="navigation">
+      {% for comment in recentCommentList %}
+        <li>{{ comment.author }}: <a href="/post/id/{{ comment.post_id }}#comment-{{ comment.id }}">{{ comment.content }}</a></li>
+      {% end %}
+    </ul>
 </div><!--/.well -->
