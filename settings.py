@@ -7,7 +7,7 @@ LISTEN_PORT = 8080
 if DEBUG:
     DB_CONNECT_STRING = 'mysql://root:123456@localhost:3306/app_leeblog?charset=utf8'
 else:
-    import sae.const
+    #import sae.const
     #sae.const.MYSQL_DB      # 数据库名
     #sae.const.MYSQL_USER    # 用户名
     #sae.const.MYSQL_PASS    # 密码
