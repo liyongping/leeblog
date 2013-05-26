@@ -185,6 +185,10 @@ ul.navigation li a {
   color:#EB8D00
 }
 
+.rss-link {
+    margin-top: -5px
+}
+
 /* ---------pagination----------------------------*/
 .pagination ul li a {
     background-color: #F8F8F8;

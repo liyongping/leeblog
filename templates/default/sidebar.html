@@ -1,5 +1,9 @@
 <div class="radiuswell">
-    <div class="related-header">最新文章</div>
+    <div class="related-header">最新文章
+    <a class="rss-link pull-right" href="/feed">
+	<img title="RSS订阅" alt="RSS订阅" src="/static/img/rss_32.png" class="alignleft">
+	</a>
+    </div>
     <ul class="navigation">
       {% for post in recentPostList %}
       	<li><a href="/post/id/{{ post.id }}" title="{{ post.title }}">{{ post.title }}</a></li>

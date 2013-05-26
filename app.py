@@ -12,6 +12,7 @@ from handler.content import *
 from handler.error import NotFoundHandler
 
 urls = [(r"/", MainHandler),
+        (r"/feed", FeedHandler),
         (r"/admin/home", AmdinHomeHandler),
         (r"/admin/login", AmdinLoginHandler),
         (r"/admin/logout", AmdinLogoutHandler),

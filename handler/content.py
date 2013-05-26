@@ -1,6 +1,7 @@
 #-*-coding:utf-8-*-
 
 import json
+import datetime
 
 from tornado.web import HTTPError
 from handler.base import BaseHandler, GetNavList
@@ -8,6 +9,7 @@ from module.models import Post, Term, Comment, Term_Relationship
 from utility import AlchemyEncoder
 from settings import CURRENT_TEMPLATE_NAME
 from handler.stat import GetStatInfo, GetPostStatInfo
+from rss.PyRSS2Gen import RSS2, RSSItem
 
 class ContentHandler(BaseHandler):
     def get_error_html(self, status_code, **kwargs):
@@ -270,3 +272,21 @@ class PostByPageId(ContentHandler):
                     relationlist = self.GetTermsWithRelationship())
     def post(self):
         pass
+
+class FeedHandler(ContentHandler):
+    def get(self):
+        items = []
+        for post in self.GetRecentPosts():
+            item = RSSItem(title = post.title,
+                           link = "http://"+self.request.host+"/post/id/"+str(post.id),
+                           description = post.content,
+                           pubDate = post.date)
+            items.append(item)
+        rss = RSS2(
+            title = self.options['blogname'],
+            link = "http://"+self.request.host,
+            description = self.options['blogdescription'],
+            lastBuildDate = datetime.datetime.now(),
+            items = items)
+        xmlresult = rss.to_xml('UTF-8')
+        self.write(xmlresult)
