@@ -32,6 +32,9 @@ STATIC_ROOT = ''
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+# 使用SAE Storage服务保存上传的附件，需在SAE管理面板创建
+STORAGE_DOMAIN_NAME = 'upload' 
+
 BASE_PATH = os.path.dirname(__file__)
 # the address path which the file will be uploaded in
 FILE_MANAGER_PATH = os.path.join(BASE_PATH, u"static/upload/")

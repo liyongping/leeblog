@@ -2,7 +2,8 @@
 
 from tornado.web import authenticated
 from handler.base import BaseHandler
-from ckfinder import CkFinder
+from ckfinder_sae import CkFinder
+#from ckfinder import CkFinder
 
 class FileListHandler(BaseHandler):
     @authenticated
