@@ -9,6 +9,8 @@ Python modules:
 
 -wtforms 1.0.3 (http://wtforms.simplecodes.com/)
 
+-PIL 1.1.7 (http://www.pythonware.com/products/pil/)
+
 UI:
 
 -ckeditor 4.1.1 (http://ckeditor.com/)
