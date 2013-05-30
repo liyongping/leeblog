@@ -30,6 +30,10 @@
 // jQuery File Tree is licensed under a Creative Commons License and is copyrighted (C)2008 by Cory S.N. LaViska.
 // For details, visit http://creativecommons.org/licenses/by/3.0/us/
 //
+function getCookie(name) {
+    var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+    return r ? r[1] : undefined;
+}
 if(jQuery) (function($){
 	
 	$.extend($.fn, {
@@ -53,7 +57,7 @@ if(jQuery) (function($){
 				function showTree(c, t) {
 					$(c).addClass('wait');
 					$(".jqueryFileTree.start").remove();
-					$.post(o.script, { dir: t }, function(data) {
+					$.post(o.script, { dir: t, _xsrf:getCookie("_xsrf")}, function(data) {
 						$(c).find('.start').html('');
 						$(c).removeClass('wait').append(data);
 						if( o.root == t ) $(c).find('UL:hidden').show(); else $(c).find('UL:hidden').slideDown({ duration: o.expandSpeed, easing: o.expandEasing });

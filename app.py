@@ -50,7 +50,7 @@ settings = dict(
             template_path=(os.path.join(os.path.dirname(__file__), "templates")),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             #ui_modules={"Entry": EntryModule},
-            xsrf_cookies=False,
+            xsrf_cookies=True,
             cookie_secret="88oETzKXQAGaYdkL6gEmGeJJFYYh7EQnp3XdTP1o/Vo=",
             login_url="/admin/login",
             debug=DEBUG,

@@ -10,17 +10,19 @@ class FileListHandler(BaseHandler):
         self.render("filemanager/index.html")
 
 class DirListHandler(BaseHandler):
+    @authenticated
     def post(self):
         ckfinder = CkFinder()
         self.write(ckfinder.dirlist(self.request))
 
 class GetInfoHandler(BaseHandler):
+    @authenticated
     def post(self):
         ckfinder = CkFinder()
         upload_path = self.get_argument("currentpath", "")
         file = self.request.files["newfile"]
         self.write(ckfinder.upload(upload_path, file))
-
+    @authenticated
     def get(self):
         ckfinder = CkFinder()
         action = self.get_argument("mode", "")
