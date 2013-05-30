@@ -119,7 +119,7 @@ class WsgiWorker(Worker):
         from werkzeug.serving import run_simple
         run_simple(self.conf.host, self.conf.port,
                    wrap(self.application),
-                   use_reloader = True,
+                   use_reloader = False,
                    use_debugger = True,
                    extra_files = files,
                    static_files = self.static_files)
