@@ -375,7 +375,6 @@ var getFileInfo = function(file){
 	
 	// Retrieve the data & populate the template.
 	$.getJSON(fileConnector + '?mode=getinfo&path=' + file, function(data){
-                
 		if(data['Code'] == 0){
 			$('#fileinfo').find('h1').text(data['Filename']);
 			$('#fileinfo').find('img').attr('src',data['Preview']);

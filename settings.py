@@ -1,5 +1,7 @@
 #-*-coding:utf-8-*-
 
+import os.path
+
 DEBUG = True
 LISTEN_PORT = 8080
 
@@ -29,6 +31,10 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
+
+BASE_PATH = os.path.dirname(__file__)
+# the address path which the file will be uploaded in
+FILE_MANAGER_PATH = os.path.join(BASE_PATH, u"static/upload/")
 
 # the app will use this template
 CURRENT_TEMPLATE_NAME = "default"
