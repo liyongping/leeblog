@@ -57,7 +57,7 @@ body {
 	width: 6px;
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
-	background: #E2EAF3 url(/static/filemanager/scripts/jquery.splitter/vgrabber.gif) no-repeat center;
+	background: #E2EAF3 url(/static/img/filemanager/vgrabber.gif) no-repeat center;
 }
 
 #fileinfo {
@@ -114,13 +114,13 @@ button {
 	border: 1px outset #ccc;
 	padding: 2px;
 	margin-left: 4px;
-	background-image: url(/static/filemanager/images/btnOFF.gif);
+	background-image: url(/static/img/filemanager/btnOFF.gif);
 	background-repeat: repeat-x;
 }
 
 button:hover {
 	border: 1px inset #ccc;
-	background-image: url(/static/filemanager/images/btnON.gif);
+	background-image: url(/static/img/filemanager/btnON.gif);
 }
 
 button span {
@@ -195,7 +195,7 @@ div.clip {
 }
 
 #contents.list thead {
-	background-image: url(/static/filemanager/images/btnOFF.gif);
+	background-image: url(/static/img/filemanager/btnOFF.gif);
 	background-repeat: repeat-x;
 	border-bottom: 1px solid #ccc;
 }
@@ -207,14 +207,14 @@ div.clip {
 
 #contents.list th.headerSortUp,
 #contents.list th.headerSortDown {
-	background-image: url(/static/filemanager/images/btnON.gif);
+	background-image: url(/static/img/filemanager/btnON.gif);
 }
 
 #contents.list th.headerSortUp span {
 	display: block;
 	width: 100%;
 	padding-right: 20px;
-	background-image: url(/static/filemanager/images/bullet_arrow_up.png);
+	background-image: url(/static/img/filemanager/bullet_arrow_up.png);
 	background-repeat: no-repeat;
 	background-position: right center;
 }
@@ -223,7 +223,7 @@ div.clip {
 	display: block;
 	width: 100%;
 	padding-right: 20px;
-	background-image: url(/static/filemanager/images/bullet_arrow_down.png);
+	background-image: url(/static/img/filemanager/bullet_arrow_down.png);
 	background-repeat: no-repeat;
 	background-position: right center;
 }
@@ -265,12 +265,12 @@ div.clip {
 }
 
 /* these apply to the contextual menus as well as the buttons */
-#select span, .contextMenu li.select a { background-image: url(/static/filemanager/images/accept.png); }
-#download span, .contextMenu li.download a { background-image: url(/static/filemanager/images/disk.png); }
-#rename span, .contextMenu li.rename a { background-image: url(/static/filemanager/images/pencil.png); }
-#delete span, .contextMenu li.delete a { background-image: url(/static/filemanager/images/bin_closed.png); }
-#upload span { background-image: url(/static/filemanager/images/add.png); }
-#newfolder span { background-image: url(/static/filemanager/images/folder_add.png); }
+#select span, .contextMenu li.select a { background-image: url(/static/img/filemanager/accept.png); }
+#download span, .contextMenu li.download a { background-image: url(/static/img/filemanager/disk.png); }
+#rename span, .contextMenu li.rename a { background-image: url(/static/img/filemanager/pencil.png); }
+#delete span, .contextMenu li.delete a { background-image: url(/static/img/filemanager/bin_closed.png); }
+#upload span { background-image: url(/static/img/filemanager/add.png); }
+#newfolder span { background-image: url(/static/img/filemanager/folder_add.png); }
 
 /* div.jqi button { background-image: url(../images/circular/yes.png); } */
 
@@ -318,16 +318,16 @@ div.jqi button {
 }
 
 button.ON {
-	background-image: url(/static/filemanager/images/btnON.gif);
+	background-image: url(/static/img/filemanager/btnON.gif);
 	border: 1px inset #ccc;
 }
 
 #grid span { 
-	background-image: url(/static/filemanager/images/application_view_icons.png);
+	background-image: url(/static/img/filemanager/application_view_icons.png);
 }
 
 #list span { 
-	background-image: url(/static/filemanager/images/application_view_list.png);
+	background-image: url(/static/img/filemanager/application_view_list.png);
 }
 
 #list {

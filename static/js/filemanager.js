@@ -13,7 +13,7 @@ if(view_path != ""){
 }
 
 // Options for alert, prompt, and confirm dialogues.
-$.SetImpromptuDefaults({
+$.prompt.setDefaults({
 	overlayspeed: 'fast',
 	show: 'fadeIn',
 	opacity: 0.4
@@ -38,7 +38,7 @@ var setUploader = function(path){
 		var foldername = 'My Folder';
 		var msg = 'Enter the name of the new folder: <input id="fname" name="fname" type="text" value="' + foldername + '" />';
 		
-		var getFolderName = function(v, m){
+		var getFolderName = function(e, v, m, f){
 			if(v != 1) return false;		
 			var fname = m.children('#fname').val();		
 
@@ -58,7 +58,7 @@ var setUploader = function(path){
 		}
 		
 		$.prompt(msg, {
-			callback: getFolderName,
+			close: getFolderName,
 			buttons: { 'Create Folder': 1, 'Cancel': 0 }
 		});		
 	});	
@@ -154,7 +154,7 @@ var renameItem = function(data){
 	var finalName = '';
 	var msg = 'Enter a new name for the file: <input id="rname" name="rname" type="text" value="' + data['Filename'] + '" />';
 
-	var getNewName = function(v, m){
+	var getNewName = function(e, v, m, f){
 		if(v != 1) return false;
 		rname = m.children('#rname').val();
 		
@@ -194,7 +194,7 @@ var renameItem = function(data){
 	}
 	
 	$.prompt(msg, {
-		callback: getNewName,
+		close: getNewName,
 		buttons: { 'Rename': 1, 'Cancel': 0 }
 	});
 	
@@ -208,30 +208,30 @@ var deleteItem = function(data){
 	var isDeleted = false;
 	var msg = 'Are you sure you wish to delete this file?';
 	
-	var doDelete = function(v, m){
-		if(v != 1) return false;	
-		var connectString = fileConnector + '?mode=delete&path=' + data['Path'];
-	
-		$.ajax({
-			type: 'GET',
-			url: connectString,
-			dataType: 'json',
-			async: false,
-			success: function(result){
-				if(result['Code'] == 0){
-					removeNode(result['Path']);
-					isDeleted = true;
-					$.prompt('Delete successful.');
-				} else {
-					isDeleted = false;
-					$.prompt(result['Error']);
-				}			
-			}
-		});	
+	var doDelete = function(e, v, m, f){
+		if(v){
+    		var connectString = fileConnector + '?mode=delete&path=' + data['Path'];
+    		$.ajax({
+    			type: 'GET',
+    			url: connectString,
+    			dataType: 'json',
+    			async: false,
+    			success: function(result){
+    				if(result['Code'] == 0){
+    					removeNode(result['Path']);
+    					isDeleted = true;
+    					$.prompt('Delete successful.');
+    				} else {
+    					isDeleted = false;
+    					$.prompt(result['Error']);
+    				}			
+    			}
+    		});
+		}
 	}
 	
 	$.prompt(msg, {
-		callback: doDelete,
+		close: doDelete,
 		buttons: { 'Yes': 1, 'No': 0 }
 	});
 	
@@ -415,7 +415,7 @@ var getFolderInfo = function(path){
 	setUploader(path);
 
 	// Display an activity indicator.
-	$('#fileinfo').html('<img id="activity" src="/static/filemanager/images/wait30trans.gif" width="30" height="30" />');
+	$('#fileinfo').html('<img id="activity" src="/static/img/filemanager/wait30trans.gif" width="30" height="30" />');
 
 	// Retrieve the data and generate the markup.
         url = fileConnector + '?path=' + path + '&mode=getfolder&showThumbs=' + showThumbs
@@ -538,8 +538,9 @@ $(function(){
 
 	// Provides support for adjustible columns.
 	$('#splitter').splitter({
-		initA: 200
-	});
+                        type: "v",
+                        minLeft: 150, sizeLeft: 200, minRight: 150
+                        });
 
 	// cosmetic tweak for buttons
 	$('button').wrapInner('<span></span>');

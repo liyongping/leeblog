@@ -17,7 +17,7 @@ absolute_path = os.path.abspath
 split_path = os.path.split
 split_ext = os.path.splitext
 
-fileicons_path = STATIC_URL+'filemanager/images/fileicons/'
+fileicons_path = STATIC_URL+'/img/filemanager/fileicons/'
 
 # 'http://localhost:8080/stor-stub/upload/'
 storage = sae.storage.Client()
@@ -33,11 +33,9 @@ class CkFinder(object):
 
     def dirlist(self, request):
         result =['<ul class="jqueryFileTree" style="display: none;">']
-        print 'storage.list(STORAGE_DOMAIN_NAME)',storage.list(STORAGE_DOMAIN_NAME)
         try:
             for f_item in storage.list(STORAGE_DOMAIN_NAME):
                 file_name = f_item['name']
-                print f_item
                 ext = os.path.splitext(file_name)[1][1:]
                 full_path = storage.url(STORAGE_DOMAIN_NAME, file_name)
                 result.append('<li class="file ext_%s"><a href="#" rel="%s">%s</a></li>' % (ext, full_path, file_name))
