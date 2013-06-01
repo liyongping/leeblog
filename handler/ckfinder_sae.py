@@ -1,11 +1,11 @@
 #-*-coding:utf-8-*-
 
 import json
-import os, datetime, types
+import os, datetime
 import StringIO
 from PIL import Image
 
-from settings import BASE_PATH, FILE_MANAGER_PATH, STATIC_URL, STORAGE_DOMAIN_NAME
+from settings import STATIC_URL, STORAGE_DOMAIN_NAME
 import sae.storage
 
 #encode_json = cjson.encode
@@ -20,12 +20,8 @@ split_ext = os.path.splitext
 fileicons_path = STATIC_URL+'/img/filemanager/fileicons/'
 
 # 'http://localhost:8080/stor-stub/upload/'
-storage = sae.storage.Client()
-domain_path = storage.url(STORAGE_DOMAIN_NAME, '')
-
-def put_obj2storage(file_name = '', data = '', expires='365', content_type=None, encoding= None, domain_name = STORAGE_DOMAIN_NAME):
-    ob = sae.storage.Object(data = data, cache_control='access plus %s day' % expires, content_type=content_type, content_encoding= encoding)
-    return storage.put(domain_name, file_name, ob)
+bucket = sae.storage.Connection().get_bucket(STORAGE_DOMAIN_NAME)
+bucket_path = bucket.generate_url('')
 
 class CkFinder(object):
     def __init__(self):
@@ -34,10 +30,10 @@ class CkFinder(object):
     def dirlist(self, request):
         result =['<ul class="jqueryFileTree" style="display: none;">']
         try:
-            for f_item in storage.list(STORAGE_DOMAIN_NAME):
+            for f_item in bucket.list():
                 file_name = f_item['name']
                 ext = os.path.splitext(file_name)[1][1:]
-                full_path = storage.url(STORAGE_DOMAIN_NAME, file_name)
+                full_path = bucket.generate_url(file_name)
                 result.append('<li class="file ext_%s"><a href="#" rel="%s">%s</a></li>' % (ext, full_path, file_name))
             result.append('</ul>')
         except:
@@ -53,9 +49,9 @@ class CkFinder(object):
             path = split_path(old)
             old_name = path[-1]
             new_name = new
-            old_object = storage.get(STORAGE_DOMAIN_NAME, old_name)
-            new_path = storage.put(STORAGE_DOMAIN_NAME, new_name, old_object)
-            storage.delete(STORAGE_DOMAIN_NAME, old_name)
+            old_object = bucket.get_object(old_name)
+            bucket.put_object(new_name, old_object[1])
+            bucket.delete_object(old_name)
         except:
             success_code = "500"
             error_message = "There was an error renaming the file."
@@ -75,7 +71,7 @@ class CkFinder(object):
         result = {}
         try:
             dir_path, name = split_path(path)
-            storage.delete(STORAGE_DOMAIN_NAME, name)
+            bucket.delete_object(name)
             error_message = name + ' was deleted successfully.'
             success_code = "0"
         except:
@@ -96,7 +92,8 @@ class CkFinder(object):
 
     def upload(self, path, files):
         file_name = files[0]["filename"]
-        file_url = put_obj2storage(file_name, files[0]["body"])
+        bucket.put_object(file_name, files[0]["body"])
+        file_url = bucket.generate_url(file_name)
         result = {
                     "Name" : file_name,
                     "Path" : file_url,
@@ -110,7 +107,7 @@ class CkFinder(object):
         SAE don't need param 'path', for it can get the path from 'STORAGE_DOMAIN_NAME'
         """
         result = {}
-        dir_list = storage.list(STORAGE_DOMAIN_NAME)
+        dir_list = bucket.list()
         for o in dir_list:
             info = self.get_info(o['name'])
             result[o['name']] = info
@@ -118,12 +115,12 @@ class CkFinder(object):
 
     def get_info(self, request_path):
         request_file = split_path(request_path)[-1]
-        path = storage.url(STORAGE_DOMAIN_NAME, request_file)
+        path = bucket.generate_url(request_file)
         imagetypes = ['.gif','.jpg','.jpeg','.png']
         ext = split_ext(path)
         preview = fileicons_path + ext[1][1:] + '.png'
         thefile = {"Path" : path,
-                    "Filename" : split_path(path)[-1],
+                    "Filename" : request_file,
                     "File Type" : split_path(path)[1][1:],
                     "Preview" : preview,
                     "Properties" : {"Date Created" : '',
@@ -136,23 +133,25 @@ class CkFinder(object):
                     "Code" : 0 }
         if ext[1] in imagetypes:
             try:
-                xx = storage.get(STORAGE_DOMAIN_NAME, request_file)
+                xx = bucket.get_object(request_file)
                 
-                file_object = StringIO.StringIO(xx.data)
+                file_object = StringIO.StringIO(xx[1])
                 img = Image.open(file_object)
                 xsize, ysize = img.size
                 thefile["Properties"]["Width"] = xsize
                 thefile["Properties"]["Height"] = ysize
                 thefile["Preview"] = path
             except Exception,e:
+                print e
                 preview = fileicons_path + ext[1][1:] + '.png'
                 thefile["Preview"] = preview
 
         thefile["File Type"] = os.path.splitext(path)[1][1:]
-        file_stat = storage.stat(STORAGE_DOMAIN_NAME, request_file)
-        create_time = datetime.datetime.fromtimestamp(file_stat['datetime']).isoformat(' ')
+        file_stat = bucket.stat_object(request_file)
+        create_time = datetime.datetime.fromtimestamp(float(file_stat['timestamp'])).strftime( '%Y-%m-%d %H:%M:%S')
+        
         thefile["Properties"]["Date Created"] = create_time
         thefile["Properties"]["Date Modified"] = create_time
-        thefile["Properties"]["Size"] = file_stat['length']
+        thefile["Properties"]["Size"] = file_stat['bytes']
         
         return thefile
